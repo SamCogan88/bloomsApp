@@ -1,7 +1,7 @@
 {
   "meta": {
     "schema": "blooms-verbs-mapping",
-    "schemaVersion": "2.3.0",
+    "schemaVersion": "2.3.2",
     "created": "2026-01-30",
     "author": "Sam Cogan",
     "license": "internal",
@@ -33,6 +33,19 @@
           "Added diagnosticStrength to help users distinguish verbs that are strongly level-diagnostic vs context-dependent.",
           "Expanded validationRules to include optional multi-level fields while retaining backwards compatibility."
         ]
+      },
+      {
+        "version": "2.3.1",
+        "date": "2026-01-30",
+        "changes": [
+          "Added taskIdeasByLevel (non-breaking) to support UI level-specific task idea display; defaulted to existing taskIdeas for each applicable level.",
+          "Normalized formatMappings to include rationale and designNotes fields expected by UI; retained notes/taskExamples for backwards compatibility."
+        ]
+      },
+      {
+        "version": "2.3.2",
+        "date": "2026-01-30",
+        "summary": "Enriched dataset: normalized mapping keys for UI, added designNotes across mappings, and expanded taskIdeas to structured objects for all verbs."
       }
     ],
     "compatibility": {
@@ -640,6 +653,14 @@
             "interpretive commentary",
             "criteria justification"
           ]
+        },
+        {
+          "title": "Compare key features",
+          "description": "Compare the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -650,7 +671,10 @@
           "designNotes": [
             "Provide a comparison framework (e.g., criteria table).",
             "Require significance/implications to avoid descriptive listing."
-          ]
+          ],
+          "notes": "Cases naturally provide context and competing options; comparison can be anchored to explicit criteria.",
+          "formatId": "case-study",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "report",
@@ -658,7 +682,10 @@
           "rationale": "Reports can support structured comparative evaluation if criteria are specified.",
           "designNotes": [
             "Include a section heading that explicitly requires comparison against criteria."
-          ]
+          ],
+          "notes": "Reports can support structured comparative evaluation if criteria are specified.",
+          "formatId": "report",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "quiz",
@@ -666,7 +693,10 @@
           "rationale": "Possible with scenario-based items but often collapses into recall unless carefully designed.",
           "designNotes": [
             "Use vignettes + 'best answer' with rationale prompts if supported."
-          ]
+          ],
+          "notes": "Possible with scenario-based items but often collapses into recall unless carefully designed.",
+          "formatId": "quiz",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -704,6 +734,65 @@
       },
       "levelGuidance": {
         "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications."
+      },
+      "taskIdeasByLevel": {
+        "analyse": [
+          {
+            "title": "Comparative case analysis",
+            "description": "Given two scenarios, compare decisions/outcomes using an explicit framework and explain implications.",
+            "evidenceProduced": [
+              "structured comparison table",
+              "justification paragraph"
+            ]
+          },
+          {
+            "title": "Criteria-based comparison matrix",
+            "description": "Create a comparison matrix of two tools/approaches against 6–8 agreed criteria, then write a short interpretation of what the pattern means.",
+            "evidenceProduced": [
+              "comparison matrix",
+              "interpretive commentary",
+              "criteria justification"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Comparative case analysis",
+            "description": "Given two scenarios, compare decisions/outcomes using an explicit framework and explain implications.",
+            "evidenceProduced": [
+              "structured comparison table",
+              "justification paragraph"
+            ]
+          },
+          {
+            "title": "Criteria-based comparison matrix",
+            "description": "Create a comparison matrix of two tools/approaches against 6–8 agreed criteria, then write a short interpretation of what the pattern means.",
+            "evidenceProduced": [
+              "comparison matrix",
+              "interpretive commentary",
+              "criteria justification"
+            ]
+          }
+        ],
+        "evaluate": [
+          {
+            "title": "Comparative case analysis",
+            "description": "Given two scenarios, compare decisions/outcomes using an explicit framework and explain implications.",
+            "evidenceProduced": [
+              "structured comparison table",
+              "justification paragraph"
+            ]
+          },
+          {
+            "title": "Criteria-based comparison matrix",
+            "description": "Create a comparison matrix of two tools/approaches against 6–8 agreed criteria, then write a short interpretation of what the pattern means.",
+            "evidenceProduced": [
+              "comparison matrix",
+              "interpretive commentary",
+              "criteria justification"
+            ]
+          }
+        ]
       }
     },
     {
@@ -743,6 +832,21 @@
             "glossary entries",
             "examples/non-examples"
           ]
+        },
+        {
+          "title": "Define key features",
+          "description": "Define the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Define using an example",
+          "description": "Define {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -753,7 +857,10 @@
           "designNotes": [
             "Prefer application-flavoured items (short scenarios) to reduce pure memorisation.",
             "Use item analysis to remove ambiguous distractors."
-          ]
+          ],
+          "notes": "Well-designed items can check precise recall of terminology quickly at scale.",
+          "formatId": "quiz",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "short-answer",
@@ -762,7 +869,10 @@
           "designNotes": [
             "Require an example/non-example to reduce rote copying.",
             "Use tight word limits and marking keys."
-          ]
+          ],
+          "notes": "Short responses allow checking accuracy while requiring learners to generate (not recognise) definitions.",
+          "formatId": "short-answer",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "portfolio",
@@ -770,7 +880,10 @@
           "rationale": "Portfolios can include definitions but are rarely the most efficient main evidence for recall.",
           "designNotes": [
             "If used, embed definitions inside artefact annotations rather than standalone lists."
-          ]
+          ],
+          "notes": "Portfolios can include definitions but are rarely the most efficient main evidence for recall.",
+          "formatId": "portfolio",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -797,6 +910,28 @@
       "levelGuidance": {
         "remember": "Focus on accurate recall/recognition with minimal interpretation.",
         "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      },
+      "taskIdeasByLevel": {
+        "remember": [
+          {
+            "title": "Glossary of core terms",
+            "description": "Produce a concise glossary of 10–15 module terms with definitions and one example each.",
+            "evidenceProduced": [
+              "glossary entries",
+              "examples/non-examples"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Glossary of core terms",
+            "description": "Produce a concise glossary of 10–15 module terms with definitions and one example each.",
+            "evidenceProduced": [
+              "glossary entries",
+              "examples/non-examples"
+            ]
+          }
+        ]
       }
     },
     {
@@ -836,6 +971,21 @@
             "annotated artefact",
             "brief notes"
           ]
+        },
+        {
+          "title": "Identify key features",
+          "description": "Identify the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Identify using an example",
+          "description": "Identify {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -846,7 +996,10 @@
           "designNotes": [
             "Use artefact snippets (charts, short code, screenshots).",
             "Avoid trivial 'spot the word' items."
-          ]
+          ],
+          "notes": "Image-/scenario-based items can check recognition efficiently if authenticity is baked in.",
+          "formatId": "quiz",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "short-answer",
@@ -854,7 +1007,10 @@
           "rationale": "Short answers can require learners to point to and name elements, with minimal justification.",
           "designNotes": [
             "Ask for 'identify + one sentence why' to reduce random selection."
-          ]
+          ],
+          "notes": "Short answers can require learners to point to and name elements, with minimal justification.",
+          "formatId": "short-answer",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "practical",
@@ -862,7 +1018,10 @@
           "rationale": "In skills contexts, identification can be observed during performance (e.g., selecting correct tool/setting).",
           "designNotes": [
             "Use checklist + brief probing questions."
-          ]
+          ],
+          "notes": "In skills contexts, identification can be observed during performance (e.g., selecting correct tool/setting).",
+          "formatId": "practical",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -890,6 +1049,28 @@
       "levelGuidance": {
         "remember": "Focus on accurate recall/recognition with minimal interpretation.",
         "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      },
+      "taskIdeasByLevel": {
+        "remember": [
+          {
+            "title": "Annotation task",
+            "description": "Annotate a provided artefact (text, code, diagram) by identifying specified elements and briefly noting why each qualifies.",
+            "evidenceProduced": [
+              "annotated artefact",
+              "brief notes"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Annotation task",
+            "description": "Annotate a provided artefact (text, code, diagram) by identifying specified elements and briefly noting why each qualifies.",
+            "evidenceProduced": [
+              "annotated artefact",
+              "brief notes"
+            ]
+          }
+        ]
       }
     },
     {
@@ -930,6 +1111,21 @@
             "short video",
             "worked example slide/notes"
           ]
+        },
+        {
+          "title": "Explain key features",
+          "description": "Explain the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Explain using an example",
+          "description": "Explain {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -940,7 +1136,10 @@
           "designNotes": [
             "Use 'because' prompts and require an example.",
             "Mark for accuracy + coherence + example relevance."
-          ]
+          ],
+          "notes": "Prompts can demand causal/relational explanation in a constrained space, reducing waffle.",
+          "formatId": "short-answer",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "presentation",
@@ -948,7 +1147,10 @@
           "rationale": "Oral explanation can reveal understanding through questioning and clarification.",
           "designNotes": [
             "Include live questions that test transfer to a new example."
-          ]
+          ],
+          "notes": "Oral explanation can reveal understanding through questioning and clarification.",
+          "formatId": "presentation",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "quiz",
@@ -956,7 +1158,10 @@
           "rationale": "Possible via extended response items but typical MCQ designs assess recognition rather than explanation.",
           "designNotes": [
             "If used, include short-answer explanation items rather than pure MCQ."
-          ]
+          ],
+          "notes": "Possible via extended response items but typical MCQ designs assess recognition rather than explanation.",
+          "formatId": "quiz",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -984,6 +1189,28 @@
       "levelGuidance": {
         "understand": "Focus on explaining meaning/mechanisms or summarising with fidelity; avoid judgement unless criteria are provided.",
         "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      },
+      "taskIdeasByLevel": {
+        "understand": [
+          {
+            "title": "Teach-back video (micro)",
+            "description": "Record a 3–5 minute teach-back explaining a concept to a novice audience, using one worked example.",
+            "evidenceProduced": [
+              "short video",
+              "worked example slide/notes"
+            ]
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Teach-back video (micro)",
+            "description": "Record a 3–5 minute teach-back explaining a concept to a novice audience, using one worked example.",
+            "evidenceProduced": [
+              "short video",
+              "worked example slide/notes"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1023,6 +1250,21 @@
             "executive summary",
             "implications list"
           ]
+        },
+        {
+          "title": "Summarise key features",
+          "description": "Summarise the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Summarise using an example",
+          "description": "Summarise {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1033,7 +1275,10 @@
           "designNotes": [
             "Specify audience and purpose.",
             "Use word limits and a marking key for 'essential points'."
-          ]
+          ],
+          "notes": "Reports often require concise summaries and can be assessed for relevance, coherence, and fidelity.",
+          "formatId": "report",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "poster",
@@ -1041,7 +1286,10 @@
           "rationale": "Posters demand concise selection and visual prioritisation of key ideas.",
           "designNotes": [
             "Require a short narrative caption plus a visual structure."
-          ]
+          ],
+          "notes": "Posters demand concise selection and visual prioritisation of key ideas.",
+          "formatId": "poster",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "quiz",
@@ -1049,7 +1297,10 @@
           "rationale": "Quizzes can check recognition of main ideas but not the ability to summarise authentically.",
           "designNotes": [
             "If used, include short constructed responses."
-          ]
+          ],
+          "notes": "Quizzes can check recognition of main ideas but not the ability to summarise authentically.",
+          "formatId": "quiz",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1076,6 +1327,28 @@
       "levelGuidance": {
         "understand": "Focus on explaining meaning/mechanisms or summarising with fidelity; avoid judgement unless criteria are provided.",
         "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      },
+      "taskIdeasByLevel": {
+        "understand": [
+          {
+            "title": "Executive summary",
+            "description": "Write an executive summary of a report/paper, including 3 implications/recommendations for a specified stakeholder.",
+            "evidenceProduced": [
+              "executive summary",
+              "implications list"
+            ]
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Executive summary",
+            "description": "Write an executive summary of a report/paper, including 3 implications/recommendations for a specified stakeholder.",
+            "evidenceProduced": [
+              "executive summary",
+              "implications list"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1115,6 +1388,21 @@
             "performance checklist",
             "probe answers"
           ]
+        },
+        {
+          "title": "Demonstrate key features",
+          "description": "Demonstrate the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Demonstrate using an example",
+          "description": "Demonstrate {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1125,7 +1413,10 @@
           "designNotes": [
             "Use an analytic rubric and standardised conditions.",
             "Include brief probing questions for decision points."
-          ]
+          ],
+          "notes": "Direct observation is the cleanest evidence of procedural performance and competence.",
+          "formatId": "practical",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "demo",
@@ -1134,7 +1425,10 @@
           "designNotes": [
             "Require live or recorded narration with checkpoints.",
             "Ask for a short 'what would you do if…' variant question."
-          ]
+          ],
+          "notes": "A walkthrough/demo captures both doing and explaining, supporting judgement of understanding and skill.",
+          "formatId": "demo",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "lab-report",
@@ -1142,7 +1436,10 @@
           "rationale": "Reports can evidence method use, but may miss whether the learner can actually perform under constraints.",
           "designNotes": [
             "Pair with raw outputs/logs or in-lab checks."
-          ]
+          ],
+          "notes": "Reports can evidence method use, but may miss whether the learner can actually perform under constraints.",
+          "formatId": "lab-report",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1171,6 +1468,28 @@
       "levelGuidance": {
         "apply": "Focus on correct method/procedure in a new situation; include evidence of workings/performance.",
         "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      },
+      "taskIdeasByLevel": {
+        "apply": [
+          {
+            "title": "Guided practical + short probe",
+            "description": "Complete a practical task while being observed, followed by 3–5 probing questions about choices and alternatives.",
+            "evidenceProduced": [
+              "performance checklist",
+              "probe answers"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Guided practical + short probe",
+            "description": "Complete a practical task while being observed, followed by 3–5 probing questions about choices and alternatives.",
+            "evidenceProduced": [
+              "performance checklist",
+              "probe answers"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1211,6 +1530,21 @@
             "tests/results",
             "short rationale"
           ]
+        },
+        {
+          "title": "Implement key features",
+          "description": "Implement the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Implement using an example",
+          "description": "Implement {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1221,7 +1555,10 @@
           "designNotes": [
             "Provide unique test cases/datasets.",
             "Require commit history or process log."
-          ]
+          ],
+          "notes": "Build tasks produce direct artefacts and allow verification through tests and constraints.",
+          "formatId": "coding-task",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "project",
@@ -1229,7 +1566,10 @@
           "rationale": "Projects allow implementing over time with milestones and evaluation against requirements.",
           "designNotes": [
             "Use milestone submissions and a final demo/viva."
-          ]
+          ],
+          "notes": "Projects allow implementing over time with milestones and evaluation against requirements.",
+          "formatId": "project",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "report",
@@ -1237,7 +1577,10 @@
           "rationale": "Reports can document implementation decisions and verification, but need accompanying artefacts.",
           "designNotes": [
             "Require linking to artefact + evidence (screenshots, logs, outputs)."
-          ]
+          ],
+          "notes": "Reports can document implementation decisions and verification, but need accompanying artefacts.",
+          "formatId": "report",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1265,6 +1608,30 @@
       "levelGuidance": {
         "apply": "Focus on correct method/procedure in a new situation; include evidence of workings/performance.",
         "create": "Require an artefact under constraints with rationale/iteration."
+      },
+      "taskIdeasByLevel": {
+        "apply": [
+          {
+            "title": "Build + test",
+            "description": "Implement a solution and submit a short test plan with evidence of results against requirements.",
+            "evidenceProduced": [
+              "working artefact",
+              "tests/results",
+              "short rationale"
+            ]
+          }
+        ],
+        "create": [
+          {
+            "title": "Build + test",
+            "description": "Implement a solution and submit a short test plan with evidence of results against requirements.",
+            "evidenceProduced": [
+              "working artefact",
+              "tests/results",
+              "short rationale"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1307,6 +1674,21 @@
             "reasoning trail",
             "proposed fix"
           ]
+        },
+        {
+          "title": "Diagnose key features",
+          "description": "Diagnose the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Diagnose using an example",
+          "description": "Diagnose {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1317,7 +1699,10 @@
           "designNotes": [
             "Include messy/partial data and require documenting reasoning.",
             "Ask learners to rule out alternatives."
-          ]
+          ],
+          "notes": "Cases provide realistic symptom sets and context for evidence-based diagnosis.",
+          "formatId": "case-study",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "practical",
@@ -1326,7 +1711,10 @@
           "designNotes": [
             "Use standard fault sets and observation checklist.",
             "Probe 'why not X' alternatives."
-          ]
+          ],
+          "notes": "Live troubleshooting can show authentic diagnostic reasoning and skill under constraints.",
+          "formatId": "practical",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "report",
@@ -1334,7 +1722,10 @@
           "rationale": "Reports can document diagnostic reasoning clearly if evidence is provided and referenced.",
           "designNotes": [
             "Require a structured 'evidence → inference → conclusion' table."
-          ]
+          ],
+          "notes": "Reports can document diagnostic reasoning clearly if evidence is provided and referenced.",
+          "formatId": "report",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1363,6 +1754,32 @@
       "levelGuidance": {
         "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications.",
         "evaluate": "Require judgement using criteria and evidence; include limitations/counterarguments."
+      },
+      "taskIdeasByLevel": {
+        "analyse": [
+          {
+            "title": "Fault-finding scenario",
+            "description": "Given a broken system/case with artefacts (logs, readings, transcripts), diagnose the most likely cause and justify your reasoning path.",
+            "evidenceProduced": [
+              "diagnosis",
+              "evidence table",
+              "reasoning trail",
+              "proposed fix"
+            ]
+          }
+        ],
+        "evaluate": [
+          {
+            "title": "Fault-finding scenario",
+            "description": "Given a broken system/case with artefacts (logs, readings, transcripts), diagnose the most likely cause and justify your reasoning path.",
+            "evidenceProduced": [
+              "diagnosis",
+              "evidence table",
+              "reasoning trail",
+              "proposed fix"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1402,6 +1819,21 @@
             "memo",
             "evidence annotations"
           ]
+        },
+        {
+          "title": "Examine key features",
+          "description": "Examine the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Examine using an example",
+          "description": "Examine {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1411,7 +1843,10 @@
           "rationale": "Reports/memos support structured examination of evidence and explicit implications.",
           "designNotes": [
             "Provide a template: observations → interpretation → implications."
-          ]
+          ],
+          "notes": "Reports/memos support structured examination of evidence and explicit implications.",
+          "formatId": "report",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "essay",
@@ -1419,7 +1854,10 @@
           "rationale": "Essays can support examination, but need clear prompts to avoid descriptive narratives.",
           "designNotes": [
             "Require explicit use of evidence and a 'what this means' section."
-          ]
+          ],
+          "notes": "Essays can support examination, but need clear prompts to avoid descriptive narratives.",
+          "formatId": "essay",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "quiz",
@@ -1427,7 +1865,10 @@
           "rationale": "Hard to evidence 'examine' via typical MCQ without extended responses and artefacts.",
           "designNotes": [
             "Use short-answer on artefact snippets if needed."
-          ]
+          ],
+          "notes": "Hard to evidence 'examine' via typical MCQ without extended responses and artefacts.",
+          "formatId": "quiz",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1454,6 +1895,28 @@
       "levelGuidance": {
         "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications.",
         "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      },
+      "taskIdeasByLevel": {
+        "analyse": [
+          {
+            "title": "Evidence examination memo",
+            "description": "Write a short memo examining a set of evidence artefacts and concluding what they imply for a decision.",
+            "evidenceProduced": [
+              "memo",
+              "evidence annotations"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Evidence examination memo",
+            "description": "Write a short memo examining a set of evidence artefacts and concluding what they imply for a decision.",
+            "evidenceProduced": [
+              "memo",
+              "evidence annotations"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1494,6 +1957,21 @@
             "criteria table",
             "evidence citations"
           ]
+        },
+        {
+          "title": "Justify key features",
+          "description": "Justify the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Justify using an example",
+          "description": "Justify {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1504,7 +1982,10 @@
           "designNotes": [
             "Require criteria table and explicit references to evidence.",
             "Include counterargument section."
-          ]
+          ],
+          "notes": "Reports can require explicit criteria, evidence, and a clear recommendation trace.",
+          "formatId": "report",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "presentation",
@@ -1513,7 +1994,10 @@
           "designNotes": [
             "Use structured Q&A aligned to criteria.",
             "Ask for trade-offs and alternatives."
-          ]
+          ],
+          "notes": "Oral defence with Q&A tests whether justification holds under probing.",
+          "formatId": "presentation",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "oral-viva",
@@ -1521,7 +2005,10 @@
           "rationale": "A viva is strong for validating authorship and depth of reasoning behind justifications.",
           "designNotes": [
             "Ask learners to apply criteria to a new mini-scenario."
-          ]
+          ],
+          "notes": "A viva is strong for validating authorship and depth of reasoning behind justifications.",
+          "formatId": "oral-viva",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1549,6 +2036,30 @@
       "levelGuidance": {
         "evaluate": "Focus on judgement using explicit criteria and evidence; include trade-offs, limitations, or counterarguments.",
         "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      },
+      "taskIdeasByLevel": {
+        "evaluate": [
+          {
+            "title": "Recommendation brief",
+            "description": "Choose between options, justify your choice against criteria, and include a short 'risks and mitigations' section.",
+            "evidenceProduced": [
+              "brief",
+              "criteria table",
+              "evidence citations"
+            ]
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Recommendation brief",
+            "description": "Choose between options, justify your choice against criteria, and include a short 'risks and mitigations' section.",
+            "evidenceProduced": [
+              "brief",
+              "criteria table",
+              "evidence citations"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1589,6 +2100,21 @@
             "rubric-scored critique",
             "revision plan"
           ]
+        },
+        {
+          "title": "Critique key features",
+          "description": "Critique the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Critique using an example",
+          "description": "Critique {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1599,7 +2125,10 @@
           "designNotes": [
             "Provide a rubric and exemplars of good feedback.",
             "Assess quality of feedback, not just the artefact."
-          ]
+          ],
+          "notes": "Peer review naturally aligns to criteria-based critique and can scale with moderation.",
+          "formatId": "peer-review",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "essay",
@@ -1607,7 +2136,10 @@
           "rationale": "Essays can support nuanced critique when criteria are explicit and evidence is required.",
           "designNotes": [
             "Require a 'criteria + evidence' structure and improvement suggestions."
-          ]
+          ],
+          "notes": "Essays can support nuanced critique when criteria are explicit and evidence is required.",
+          "formatId": "essay",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "presentation",
@@ -1615,7 +2147,10 @@
           "rationale": "Oral critique with Q&A can surface depth and ability to respond to challenge.",
           "designNotes": [
             "Use timed segments: critique + improvement + defence."
-          ]
+          ],
+          "notes": "Oral critique with Q&A can surface depth and ability to respond to challenge.",
+          "formatId": "presentation",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1643,6 +2178,28 @@
       "levelGuidance": {
         "evaluate": "Focus on judgement using explicit criteria and evidence; include trade-offs, limitations, or counterarguments.",
         "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      },
+      "taskIdeasByLevel": {
+        "evaluate": [
+          {
+            "title": "Structured peer review",
+            "description": "Critique a peer artefact using a rubric, then write a short revision plan for improvements.",
+            "evidenceProduced": [
+              "rubric-scored critique",
+              "revision plan"
+            ]
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Structured peer review",
+            "description": "Critique a peer artefact using a rubric, then write a short revision plan for improvements.",
+            "evidenceProduced": [
+              "rubric-scored critique",
+              "revision plan"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1685,6 +2242,21 @@
             "rationale",
             "evaluation plan"
           ]
+        },
+        {
+          "title": "Design key features",
+          "description": "Design the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Design using an example",
+          "description": "Design {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1695,7 +2267,10 @@
           "designNotes": [
             "Require explicit success criteria and trade-offs.",
             "Include an evaluation plan (how you’ll judge it)."
-          ]
+          ],
+          "notes": "A brief/spec captures requirements, constraints, and rationale—core design evidence.",
+          "formatId": "design-brief",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "project",
@@ -1704,7 +2279,10 @@
           "designNotes": [
             "Use milestones: requirements → prototype → test → refine.",
             "Require process evidence."
-          ]
+          ],
+          "notes": "Projects allow design choices to be tested and iterated with feedback over time.",
+          "formatId": "project",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "portfolio",
@@ -1712,7 +2290,10 @@
           "rationale": "Portfolios can show iterative design development and reflection across artefacts.",
           "designNotes": [
             "Require versioning and annotations that explain decisions and changes."
-          ]
+          ],
+          "notes": "Portfolios can show iterative design development and reflection across artefacts.",
+          "formatId": "portfolio",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1746,6 +2327,44 @@
         "create": "Focus on producing an artefact under constraints; include rationale, iteration, and success criteria.",
         "apply": "Require correct method/procedure; show workings or performance.",
         "evaluate": "Require judgement using criteria and evidence; include limitations/counterarguments."
+      },
+      "taskIdeasByLevel": {
+        "create": [
+          {
+            "title": "Design brief + prototype",
+            "description": "Create a design brief with requirements and constraints, then produce a low-fidelity prototype and rationale.",
+            "evidenceProduced": [
+              "design brief",
+              "prototype",
+              "rationale",
+              "evaluation plan"
+            ]
+          }
+        ],
+        "apply": [
+          {
+            "title": "Design brief + prototype",
+            "description": "Create a design brief with requirements and constraints, then produce a low-fidelity prototype and rationale.",
+            "evidenceProduced": [
+              "design brief",
+              "prototype",
+              "rationale",
+              "evaluation plan"
+            ]
+          }
+        ],
+        "evaluate": [
+          {
+            "title": "Design brief + prototype",
+            "description": "Create a design brief with requirements and constraints, then produce a low-fidelity prototype and rationale.",
+            "evidenceProduced": [
+              "design brief",
+              "prototype",
+              "rationale",
+              "evaluation plan"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1786,6 +2405,21 @@
             "change log",
             "test/feedback evidence"
           ]
+        },
+        {
+          "title": "Develop key features",
+          "description": "Develop the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Develop using an example",
+          "description": "Develop {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1796,7 +2430,10 @@
           "designNotes": [
             "Require staged submissions and an evaluation at each stage.",
             "Include demo and short viva for authorship."
-          ]
+          ],
+          "notes": "Projects support iterative development with milestones and multiple evidence points.",
+          "formatId": "project",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "portfolio",
@@ -1804,7 +2441,10 @@
           "rationale": "Portfolios can capture development over time with annotations and reflection.",
           "designNotes": [
             "Require curated evidence of iterations and decision points."
-          ]
+          ],
+          "notes": "Portfolios can capture development over time with annotations and reflection.",
+          "formatId": "portfolio",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "coding-task",
@@ -1812,7 +2452,10 @@
           "rationale": "Build tasks can evidence development if version history and tests are required.",
           "designNotes": [
             "Require repository link, commits, and automated tests."
-          ]
+          ],
+          "notes": "Build tasks can evidence development if version history and tests are required.",
+          "formatId": "coding-task",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1840,6 +2483,30 @@
       "levelGuidance": {
         "create": "Focus on producing an artefact under constraints; include rationale, iteration, and success criteria.",
         "apply": "Require correct method/procedure; show workings or performance."
+      },
+      "taskIdeasByLevel": {
+        "create": [
+          {
+            "title": "Iterative build with milestones",
+            "description": "Submit three milestone versions of an artefact, each with a short change log and justification based on feedback or testing.",
+            "evidenceProduced": [
+              "artefact versions",
+              "change log",
+              "test/feedback evidence"
+            ]
+          }
+        ],
+        "apply": [
+          {
+            "title": "Iterative build with milestones",
+            "description": "Submit three milestone versions of an artefact, each with a short change log and justification based on feedback or testing.",
+            "evidenceProduced": [
+              "artefact versions",
+              "change log",
+              "test/feedback evidence"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1878,6 +2545,21 @@
             "checklist",
             "mapping notes"
           ]
+        },
+        {
+          "title": "List key features",
+          "description": "List the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "List using an example",
+          "description": "List {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1887,7 +2569,10 @@
           "rationale": "Objective items can assess recall of correct items efficiently.",
           "designNotes": [
             "Use 'select all that apply' sparingly; prefer constructed responses or scenario-based recall."
-          ]
+          ],
+          "notes": "Objective items can assess recall of correct items efficiently.",
+          "formatId": "quiz",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "short-answer",
@@ -1896,7 +2581,10 @@
           "designNotes": [
             "Specify expected count/range to guide completeness.",
             "Allow partial credit for partially correct sets."
-          ]
+          ],
+          "notes": "Constructed listing reduces guessing compared to recognition.",
+          "formatId": "short-answer",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "portfolio",
@@ -1904,7 +2592,10 @@
           "rationale": "Portfolios can include lists but are not primarily designed for recall evidence.",
           "designNotes": [
             "If used, embed lists as part of artefact annotations/checklists."
-          ]
+          ],
+          "notes": "Portfolios can include lists but are not primarily designed for recall evidence.",
+          "formatId": "portfolio",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -1931,6 +2622,28 @@
       "levelGuidance": {
         "remember": "Focus on accurate recall/recognition with minimal interpretation.",
         "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      },
+      "taskIdeasByLevel": {
+        "remember": [
+          {
+            "title": "Checklist creation",
+            "description": "Create a checklist of required steps/components for a task, then map each item to where it appears in a provided example.",
+            "evidenceProduced": [
+              "checklist",
+              "mapping notes"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Checklist creation",
+            "description": "Create a checklist of required steps/components for a task, then map each item to where it appears in a provided example.",
+            "evidenceProduced": [
+              "checklist",
+              "mapping notes"
+            ]
+          }
+        ]
       }
     },
     {
@@ -1970,6 +2683,21 @@
             "classified set",
             "justification notes"
           ]
+        },
+        {
+          "title": "Classify key features",
+          "description": "Classify the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Classify using an example",
+          "description": "Classify {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -1979,7 +2707,10 @@
           "rationale": "Short responses can capture both classification and brief justification.",
           "designNotes": [
             "Include boundary cases and require justification for at least two items."
-          ]
+          ],
+          "notes": "Short responses can capture both classification and brief justification.",
+          "formatId": "short-answer",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "quiz",
@@ -1987,7 +2718,10 @@
           "rationale": "Possible with scenario-based items, but justification is limited in typical MCQ.",
           "designNotes": [
             "Use matching/drag-drop plus a short 'why' item if your platform allows."
-          ]
+          ],
+          "notes": "Possible with scenario-based items, but justification is limited in typical MCQ.",
+          "formatId": "quiz",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "case-study",
@@ -1995,7 +2729,10 @@
           "rationale": "Cases can require classifying issues/types before proposing action, making the task more authentic.",
           "designNotes": [
             "Make classification consequential: it should change the recommended response."
-          ]
+          ],
+          "notes": "Cases can require classifying issues/types before proposing action, making the task more authentic.",
+          "formatId": "case-study",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -2022,6 +2759,28 @@
       "levelGuidance": {
         "understand": "Focus on explaining meaning/mechanisms or summarising with fidelity; avoid judgement unless criteria are provided.",
         "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      },
+      "taskIdeasByLevel": {
+        "understand": [
+          {
+            "title": "Sorting with boundary cases",
+            "description": "Classify a set of examples including tricky boundary cases, then explain two decisions where classification was ambiguous.",
+            "evidenceProduced": [
+              "classified set",
+              "justification notes"
+            ]
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Sorting with boundary cases",
+            "description": "Classify a set of examples including tricky boundary cases, then explain two decisions where classification was ambiguous.",
+            "evidenceProduced": [
+              "classified set",
+              "justification notes"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2061,6 +2820,21 @@
             "worked solutions",
             "interpretation notes"
           ]
+        },
+        {
+          "title": "Calculate key features",
+          "description": "Calculate the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Calculate using an example",
+          "description": "Calculate {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -2070,7 +2844,10 @@
           "rationale": "Constructed responses can require workings and method choice.",
           "designNotes": [
             "Award marks for method, workings, and interpretation separately."
-          ]
+          ],
+          "notes": "Constructed responses can require workings and method choice.",
+          "formatId": "short-answer",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "quiz",
@@ -2079,7 +2856,10 @@
           "designNotes": [
             "Use multi-step items, numerical tolerances, and randomised parameters.",
             "Add at least some items requiring upload of workings."
-          ]
+          ],
+          "notes": "Auto-marking works for final answers but can miss method; use it when scale matters and build in method checks.",
+          "formatId": "quiz",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "report",
@@ -2087,7 +2867,10 @@
           "rationale": "Reports may include calculations, but are inefficient if the core outcome is computational skill.",
           "designNotes": [
             "If used, require an appendix of workings and interpretation."
-          ]
+          ],
+          "notes": "Reports may include calculations, but are inefficient if the core outcome is computational skill.",
+          "formatId": "report",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -2114,6 +2897,28 @@
       "levelGuidance": {
         "apply": "Focus on correct method/procedure in a new situation; include evidence of workings/performance.",
         "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      },
+      "taskIdeasByLevel": {
+        "apply": [
+          {
+            "title": "Worked problem set with interpretation",
+            "description": "Solve a set of problems and include a short interpretation/decision note after each calculation.",
+            "evidenceProduced": [
+              "worked solutions",
+              "interpretation notes"
+            ]
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Worked problem set with interpretation",
+            "description": "Solve a set of problems and include a short interpretation/decision note after each calculation.",
+            "evidenceProduced": [
+              "worked solutions",
+              "interpretation notes"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2153,6 +2958,21 @@
             "classified responses",
             "explanations"
           ]
+        },
+        {
+          "title": "Differentiate key features",
+          "description": "Differentiate the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Differentiate using an example",
+          "description": "Differentiate {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -2162,7 +2982,10 @@
           "rationale": "Context-rich cases make differences consequential and easier to justify.",
           "designNotes": [
             "Ask learners to explain implications of each difference for a decision."
-          ]
+          ],
+          "notes": "Context-rich cases make differences consequential and easier to justify.",
+          "formatId": "case-study",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "short-answer",
@@ -2170,7 +2993,10 @@
           "rationale": "Short prompts can require specifying the 'difference that matters' succinctly.",
           "designNotes": [
             "Require a rule-of-thumb or criterion for each distinction."
-          ]
+          ],
+          "notes": "Short prompts can require specifying the 'difference that matters' succinctly.",
+          "formatId": "short-answer",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "quiz",
@@ -2178,7 +3004,10 @@
           "rationale": "Typical MCQs often reduce differentiation to recognition without explanation.",
           "designNotes": [
             "If used, add 'choose + explain in one sentence'."
-          ]
+          ],
+          "notes": "Typical MCQs often reduce differentiation to recognition without explanation.",
+          "formatId": "quiz",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -2205,6 +3034,28 @@
       "levelGuidance": {
         "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications.",
         "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      },
+      "taskIdeasByLevel": {
+        "analyse": [
+          {
+            "title": "Misconception spotting",
+            "description": "Given short learner responses, differentiate misconceptions from correct reasoning and explain what evidence led you to that conclusion.",
+            "evidenceProduced": [
+              "classified responses",
+              "explanations"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Misconception spotting",
+            "description": "Given short learner responses, differentiate misconceptions from correct reasoning and explain what evidence led you to that conclusion.",
+            "evidenceProduced": [
+              "classified responses",
+              "explanations"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2245,6 +3096,21 @@
             "criteria table",
             "risk register snippet"
           ]
+        },
+        {
+          "title": "Recommend key features",
+          "description": "Recommend the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Recommend using an example",
+          "description": "Recommend {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -2255,7 +3121,10 @@
           "designNotes": [
             "Require explicit criteria and constraints.",
             "Include 'what would change your mind' prompt."
-          ]
+          ],
+          "notes": "Reports/memos naturally support recommendation structures and traceability to evidence.",
+          "formatId": "report",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "presentation",
@@ -2263,7 +3132,10 @@
           "rationale": "Presentations allow persuasion and can be stress-tested via questioning.",
           "designNotes": [
             "Include live Q&A and require a slide on trade-offs/risks."
-          ]
+          ],
+          "notes": "Presentations allow persuasion and can be stress-tested via questioning.",
+          "formatId": "presentation",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "oral-viva",
@@ -2271,7 +3143,10 @@
           "rationale": "A viva can test whether recommendations are owned and defensible, not generated.",
           "designNotes": [
             "Ask learners to re-recommend under a changed constraint."
-          ]
+          ],
+          "notes": "A viva can test whether recommendations are owned and defensible, not generated.",
+          "formatId": "oral-viva",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -2299,6 +3174,30 @@
       "levelGuidance": {
         "evaluate": "Focus on judgement using explicit criteria and evidence; include trade-offs, limitations, or counterarguments.",
         "create": "Require an artefact under constraints with rationale/iteration."
+      },
+      "taskIdeasByLevel": {
+        "evaluate": [
+          {
+            "title": "Decision memo",
+            "description": "Write a decision memo to a stakeholder recommending an option, with a criteria table and risk/mitigation section.",
+            "evidenceProduced": [
+              "memo",
+              "criteria table",
+              "risk register snippet"
+            ]
+          }
+        ],
+        "create": [
+          {
+            "title": "Decision memo",
+            "description": "Write a decision memo to a stakeholder recommending an option, with a criteria table and risk/mitigation section.",
+            "evidenceProduced": [
+              "memo",
+              "criteria table",
+              "risk register snippet"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2338,6 +3237,21 @@
             "composed artefact",
             "rationale"
           ]
+        },
+        {
+          "title": "Compose key features",
+          "description": "Compose the key features/steps of {topic} in correct order, using appropriate terminology.",
+          "evidenceProduced": [
+            "structured notes",
+            "short written response"
+          ]
+        },
+        {
+          "title": "Compose using an example",
+          "description": "Compose {concept} and include one concrete example that illustrates it accurately.",
+          "evidenceProduced": [
+            "short written response"
+          ]
         }
       ],
       "formatMappings": [
@@ -2347,7 +3261,10 @@
           "rationale": "Portfolios can capture composed artefacts plus reflective rationale and iteration.",
           "designNotes": [
             "Require annotations explaining choices and revisions."
-          ]
+          ],
+          "notes": "Portfolios can capture composed artefacts plus reflective rationale and iteration.",
+          "formatId": "portfolio",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "project",
@@ -2355,7 +3272,10 @@
           "rationale": "Projects can support composition as part of a larger deliverable with constraints and feedback.",
           "designNotes": [
             "Include stakeholder/audience constraints and review cycles."
-          ]
+          ],
+          "notes": "Projects can support composition as part of a larger deliverable with constraints and feedback.",
+          "formatId": "project",
+          "taskIdea": ""
         },
         {
           "assessmentFormatId": "presentation",
@@ -2363,7 +3283,10 @@
           "rationale": "Presentations can showcase composed work but may not fully evidence the composition process.",
           "designNotes": [
             "If used, pair with submission of the artefact and a rationale."
-          ]
+          ],
+          "notes": "Presentations can showcase composed work but may not fully evidence the composition process.",
+          "formatId": "presentation",
+          "taskIdea": ""
         }
       ],
       "tags": {
@@ -2392,6 +3315,28 @@
       "levelGuidance": {
         "create": "Focus on producing an artefact under constraints; include rationale, iteration, and success criteria.",
         "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      },
+      "taskIdeasByLevel": {
+        "create": [
+          {
+            "title": "Constrained composition",
+            "description": "Create a piece under explicit constraints (length, audience, required elements) and include a brief rationale for choices.",
+            "evidenceProduced": [
+              "composed artefact",
+              "rationale"
+            ]
+          }
+        ],
+        "understand": [
+          {
+            "title": "Constrained composition",
+            "description": "Create a piece under explicit constraints (length, audience, required elements) and include a brief rationale for choices.",
+            "evidenceProduced": [
+              "composed artefact",
+              "rationale"
+            ]
+          }
+        ]
       }
     },
     {
@@ -2426,9 +3371,21 @@
         "Describe the differences between {A} and {B} in terms of {dimension}."
       ],
       "taskIdeas": [
-        "Write a short structured description of {concept} for a novice audience, using an example.",
-        "Create an annotated diagram that describes the parts of {system} and what each part does.",
-        "Record a 2–3 minute explanation that describes the steps of {procedure} and common errors."
+        {
+          "title": "Write a short structured description of…",
+          "description": "Write a short structured description of {concept} for a novice audience, using an example.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Create an annotated diagram that describes…",
+          "description": "Create an annotated diagram that describes the parts of {system} and what each part does.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Record a 2 3 minute explanation…",
+          "description": "Record a 2–3 minute explanation that describes the steps of {procedure} and common errors.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -2442,7 +3399,13 @@
             "scalable",
             "low-workload",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Works well when prompts require accurate, relevant features; can include context to demonstrate understanding.",
+          "designNotes": [
+            "State what must be included (e.g., number of features/steps) and mark for accuracy and relevance; avoid adding 'why/justify' unless you intend a higher level."
+          ],
+          "taskIdea": "Answer 3 prompts describing {concept}, {example}, and {implication}.",
+          "assessmentFormatId": "short-answer"
         },
         {
           "formatId": "quiz",
@@ -2454,7 +3417,13 @@
             "scalable",
             "low-workload",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Can check recall/understanding if questions are well-written; risk of drifting to recall-only without context.",
+          "designNotes": [
+            "State what must be included (e.g., number of features/steps) and mark for accuracy and relevance; avoid adding 'why/justify' unless you intend a higher level."
+          ],
+          "taskIdea": "Short-answer quiz items: 'Describe X and give one example'.",
+          "assessmentFormatId": "quiz"
         },
         {
           "formatId": "poster",
@@ -2466,7 +3435,13 @@
             "practical",
             "authenticity-medium",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Suitable when description is supported by visuals/structure; depends on marking criteria.",
+          "designNotes": [
+            "State what must be included (e.g., number of features/steps) and mark for accuracy and relevance; avoid adding 'why/justify' unless you intend a higher level."
+          ],
+          "taskIdea": "Poster describing a system with labelled parts and brief functional descriptions.",
+          "assessmentFormatId": "poster"
         },
         {
           "formatId": "presentation",
@@ -2477,7 +3452,13 @@
             "oral",
             "individual-or-group",
             "ai-risk-low"
-          ]
+          ],
+          "rationale": "Oral description can show understanding; depends on prompts and time limits.",
+          "designNotes": [
+            "State what must be included (e.g., number of features/steps) and mark for accuracy and relevance; avoid adding 'why/justify' unless you intend a higher level."
+          ],
+          "taskIdea": "Mini-presentation describing a process and its purpose for a given audience.",
+          "assessmentFormatId": "presentation"
         }
       ],
       "tags": [
@@ -2500,6 +3481,42 @@
       "levelGuidance": {
         "remember": "Description is primarily listing features/steps without explanation of significance.",
         "understand": "Description includes organisation, correct terminology, and context/examples showing comprehension."
+      },
+      "taskIdeasByLevel": {
+        "understand": [
+          {
+            "title": "Write a short structured description of…",
+            "description": "Write a short structured description of {concept} for a novice audience, using an example.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create an annotated diagram that describes…",
+            "description": "Create an annotated diagram that describes the parts of {system} and what each part does.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Record a 2 3 minute explanation…",
+            "description": "Record a 2–3 minute explanation that describes the steps of {procedure} and common errors.",
+            "evidenceProduced": []
+          }
+        ],
+        "remember": [
+          {
+            "title": "Write a short structured description of…",
+            "description": "Write a short structured description of {concept} for a novice audience, using an example.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create an annotated diagram that describes…",
+            "description": "Create an annotated diagram that describes the parts of {system} and what each part does.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Record a 2 3 minute explanation…",
+            "description": "Record a 2–3 minute explanation that describes the steps of {procedure} and common errors.",
+            "evidenceProduced": []
+          }
+        ]
       }
     },
     {
@@ -2534,9 +3551,21 @@
         "Apply {concept} to interpret/solve {scenario}."
       ],
       "taskIdeas": [
-        "Apply a taught method to a new dataset and submit the resulting analysis with brief commentary.",
-        "Apply a policy/framework to a case study and produce a justified action plan.",
-        "Apply a procedure in a practical setting and document steps and outcomes."
+        {
+          "title": "Apply a taught method to a…",
+          "description": "Apply a taught method to a new dataset and submit the resulting analysis with brief commentary.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Apply a policy framework to a…",
+          "description": "Apply a policy/framework to a case study and produce a justified action plan.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Apply a procedure in a practical…",
+          "description": "Apply a procedure in a practical setting and document steps and outcomes.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -2549,7 +3578,13 @@
             "individual",
             "ai-risk-low",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Directly captures procedural performance; depends on clarity of criteria and conditions.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "In-lab task: apply {procedure} to achieve {specified result}.",
+          "assessmentFormatId": "practical"
         },
         {
           "formatId": "coding-task",
@@ -2560,7 +3595,13 @@
             "individual",
             "scalable-medium",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Applying algorithms/techniques is observable via artefacts and tests; depends on task authenticity.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "Implement {algorithm} and apply it to given inputs; pass unit tests.",
+          "assessmentFormatId": "coding-task"
         },
         {
           "formatId": "case-study",
@@ -2571,7 +3612,13 @@
             "written",
             "authenticity-high",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Good when 'apply' is to a realistic scenario; depends on case complexity and marking criteria.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "Apply {framework} to a case and produce recommendations and rationale.",
+          "assessmentFormatId": "case-study"
         },
         {
           "formatId": "simulation",
@@ -2582,7 +3629,13 @@
             "practical",
             "authenticity-medium",
             "ai-risk-low"
-          ]
+          ],
+          "rationale": "Can show application in dynamic environments; depends on debrief/trace evidence.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "Run a simulation applying {rules} and explain decisions made at key points.",
+          "assessmentFormatId": "simulation"
         }
       ],
       "tags": [
@@ -2606,6 +3659,59 @@
         "understand": "Application is guided/scaffolded and focuses on explaining steps rather than independent transfer.",
         "apply": "Independent use in a new situation; correctness and appropriateness of method are central.",
         "analyse": "Application is followed by analytic interpretation (patterns/assumptions/relationships)."
+      },
+      "taskIdeasByLevel": {
+        "apply": [
+          {
+            "title": "Apply a taught method to a…",
+            "description": "Apply a taught method to a new dataset and submit the resulting analysis with brief commentary.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Apply a policy framework to a…",
+            "description": "Apply a policy/framework to a case study and produce a justified action plan.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Apply a procedure in a practical…",
+            "description": "Apply a procedure in a practical setting and document steps and outcomes.",
+            "evidenceProduced": []
+          }
+        ],
+        "understand": [
+          {
+            "title": "Apply a taught method to a…",
+            "description": "Apply a taught method to a new dataset and submit the resulting analysis with brief commentary.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Apply a policy framework to a…",
+            "description": "Apply a policy/framework to a case study and produce a justified action plan.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Apply a procedure in a practical…",
+            "description": "Apply a procedure in a practical setting and document steps and outcomes.",
+            "evidenceProduced": []
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Apply a taught method to a…",
+            "description": "Apply a taught method to a new dataset and submit the resulting analysis with brief commentary.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Apply a policy framework to a…",
+            "description": "Apply a policy/framework to a case study and produce a justified action plan.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Apply a procedure in a practical…",
+            "description": "Apply a procedure in a practical setting and document steps and outcomes.",
+            "evidenceProduced": []
+          }
+        ]
       }
     },
     {
@@ -2640,9 +3746,21 @@
         "Perform {role/process} in a simulated or authentic setting."
       ],
       "taskIdeas": [
-        "Observed skill check: perform {skill} with a checklist and brief reflection on errors.",
-        "OSCE-style station: perform {task} within time limit and explain decision points.",
-        "Live demo: perform a workflow and troubleshoot when given a constraint."
+        {
+          "title": "Observed skill check perform skill with…",
+          "description": "Observed skill check: perform {skill} with a checklist and brief reflection on errors.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "OSCE style station perform task within…",
+          "description": "OSCE-style station: perform {task} within time limit and explain decision points.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Live demo perform a workflow and…",
+          "description": "Live demo: perform a workflow and troubleshoot when given a constraint.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -2655,7 +3773,13 @@
             "oral",
             "ai-risk-low",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Direct observation supports validity for performance; depends on rubric/checklist quality.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "Demo performing {workflow} while narrating key choices.",
+          "assessmentFormatId": "demo"
         },
         {
           "formatId": "practical",
@@ -2666,7 +3790,13 @@
             "practical",
             "authenticity-high",
             "ai-risk-low"
-          ]
+          ],
+          "rationale": "Best match for hands-on skills and procedures; depends on conditions and resources.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "Perform {lab technique} and record outputs in a log.",
+          "assessmentFormatId": "practical"
         },
         {
           "formatId": "oral-viva",
@@ -2677,7 +3807,13 @@
             "oral",
             "ai-risk-low",
             "workload-high"
-          ]
+          ],
+          "rationale": "Can probe reasoning behind performance; depends on pairing with artefact/observation.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "Viva after performance: explain why you did X at step Y.",
+          "assessmentFormatId": "oral-viva"
         },
         {
           "formatId": "portfolio",
@@ -2688,7 +3824,13 @@
             "authenticity-high",
             "workload-high",
             "ai-risk-low"
-          ]
+          ],
+          "rationale": "Portfolio can evidence repeated performance over time; depends on verification/authenticity.",
+          "designNotes": [
+            "Require use of the method/procedure on a new or contextualised example; include marking criteria for correctness, process, and decision points."
+          ],
+          "taskIdea": "Portfolio of performance logs + supervisor sign-off.",
+          "assessmentFormatId": "portfolio"
         }
       ],
       "tags": [
@@ -2712,6 +3854,76 @@
         "remember": "Reproduction of a routine with minimal adaptation.",
         "apply": "Competent execution in context, including appropriate adjustments.",
         "evaluate": "Includes judgement about quality (self/peer) using explicit criteria."
+      },
+      "taskIdeasByLevel": {
+        "apply": [
+          {
+            "title": "Observed skill check perform skill with…",
+            "description": "Observed skill check: perform {skill} with a checklist and brief reflection on errors.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "OSCE style station perform task within…",
+            "description": "OSCE-style station: perform {task} within time limit and explain decision points.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Live demo perform a workflow and…",
+            "description": "Live demo: perform a workflow and troubleshoot when given a constraint.",
+            "evidenceProduced": []
+          }
+        ],
+        "remember": [
+          {
+            "title": "Observed skill check perform skill with…",
+            "description": "Observed skill check: perform {skill} with a checklist and brief reflection on errors.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "OSCE style station perform task within…",
+            "description": "OSCE-style station: perform {task} within time limit and explain decision points.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Live demo perform a workflow and…",
+            "description": "Live demo: perform a workflow and troubleshoot when given a constraint.",
+            "evidenceProduced": []
+          }
+        ],
+        "understand": [
+          {
+            "title": "Observed skill check perform skill with…",
+            "description": "Observed skill check: perform {skill} with a checklist and brief reflection on errors.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "OSCE style station perform task within…",
+            "description": "OSCE-style station: perform {task} within time limit and explain decision points.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Live demo perform a workflow and…",
+            "description": "Live demo: perform a workflow and troubleshoot when given a constraint.",
+            "evidenceProduced": []
+          }
+        ],
+        "evaluate": [
+          {
+            "title": "Observed skill check perform skill with…",
+            "description": "Observed skill check: perform {skill} with a checklist and brief reflection on errors.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "OSCE style station perform task within…",
+            "description": "OSCE-style station: perform {task} within time limit and explain decision points.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Live demo perform a workflow and…",
+            "description": "Live demo: perform a workflow and troubleshoot when given a constraint.",
+            "evidenceProduced": []
+          }
+        ]
       }
     },
     {
@@ -2748,9 +3960,21 @@
         "Analyse {argument} to identify assumptions, evidence, and reasoning."
       ],
       "taskIdeas": [
-        "Analyse a dataset and produce a short insights memo explaining key patterns and implications.",
-        "Analyse a case study and map causes, stakeholders, and constraints before proposing options.",
-        "Analyse an argument by annotating claims/evidence and identifying missing evidence."
+        {
+          "title": "Analyse a dataset and produce a…",
+          "description": "Analyse a dataset and produce a short insights memo explaining key patterns and implications.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Analyse a case study and map…",
+          "description": "Analyse a case study and map causes, stakeholders, and constraints before proposing options.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Analyse an argument by annotating claims…",
+          "description": "Analyse an argument by annotating claims/evidence and identifying missing evidence.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -2762,7 +3986,13 @@
             "written",
             "ai-risk-medium",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Reports support structured analysis with evidence; depends on criteria (relationships/implications).",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Analysis report: identify patterns in data and justify interpretations.",
+          "assessmentFormatId": "report"
         },
         {
           "formatId": "lab-report",
@@ -2773,7 +4003,13 @@
             "written",
             "practical",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Often includes analysis of results; depends on requiring interpretation not just computation.",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Lab report section: analyse results and discuss sources of error/meaning.",
+          "assessmentFormatId": "lab-report"
         },
         {
           "formatId": "case-study",
@@ -2784,7 +4020,13 @@
             "authenticity-high",
             "written",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Cases can elicit analysis of relationships/causes; depends on complexity and prompts.",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Analyse case using framework; identify drivers and trade-offs.",
+          "assessmentFormatId": "case-study"
         },
         {
           "formatId": "oral-viva",
@@ -2795,7 +4037,13 @@
             "oral",
             "ai-risk-low",
             "workload-high"
-          ]
+          ],
+          "rationale": "Good for probing analytic reasoning; depends on having an artefact to discuss.",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Viva: walk through your analysis choices and what they imply.",
+          "assessmentFormatId": "oral-viva"
         }
       ],
       "tags": [
@@ -2819,6 +4067,59 @@
         "understand": "Heavily scaffolded analysis focused on explaining relationships in a simple example.",
         "analyse": "Independent decomposition + relationship/pattern identification + significance.",
         "evaluate": "Analysis is used to support a judgement with explicit criteria."
+      },
+      "taskIdeasByLevel": {
+        "analyse": [
+          {
+            "title": "Analyse a dataset and produce a…",
+            "description": "Analyse a dataset and produce a short insights memo explaining key patterns and implications.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Analyse a case study and map…",
+            "description": "Analyse a case study and map causes, stakeholders, and constraints before proposing options.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Analyse an argument by annotating claims…",
+            "description": "Analyse an argument by annotating claims/evidence and identifying missing evidence.",
+            "evidenceProduced": []
+          }
+        ],
+        "understand": [
+          {
+            "title": "Analyse a dataset and produce a…",
+            "description": "Analyse a dataset and produce a short insights memo explaining key patterns and implications.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Analyse a case study and map…",
+            "description": "Analyse a case study and map causes, stakeholders, and constraints before proposing options.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Analyse an argument by annotating claims…",
+            "description": "Analyse an argument by annotating claims/evidence and identifying missing evidence.",
+            "evidenceProduced": []
+          }
+        ],
+        "evaluate": [
+          {
+            "title": "Analyse a dataset and produce a…",
+            "description": "Analyse a dataset and produce a short insights memo explaining key patterns and implications.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Analyse a case study and map…",
+            "description": "Analyse a case study and map causes, stakeholders, and constraints before proposing options.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Analyse an argument by annotating claims…",
+            "description": "Analyse an argument by annotating claims/evidence and identifying missing evidence.",
+            "evidenceProduced": []
+          }
+        ]
       }
     },
     {
@@ -2855,9 +4156,21 @@
         "Investigate {system/process} to identify issues and propose evidence-based improvements."
       ],
       "taskIdeas": [
-        "Mini research task: investigate a question, justify method, analyse evidence, and report findings.",
-        "Diagnostic investigation: investigate a failure, collect logs/evidence, identify root causes.",
-        "Workplace-style investigation: investigate stakeholder needs and produce a brief with findings."
+        {
+          "title": "Mini research task investigate a question…",
+          "description": "Mini research task: investigate a question, justify method, analyse evidence, and report findings.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Diagnostic investigation investigate a failure collect…",
+          "description": "Diagnostic investigation: investigate a failure, collect logs/evidence, identify root causes.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Workplace style investigation investigate stakeholder needs…",
+          "description": "Workplace-style investigation: investigate stakeholder needs and produce a brief with findings.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -2869,7 +4182,13 @@
             "authenticity-high",
             "workload-high",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Projects accommodate inquiry cycles (question→method→evidence→findings); depends on scope control.",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Project: investigate X, collect data, analyse, present findings and limitations.",
+          "assessmentFormatId": "project"
         },
         {
           "formatId": "report",
@@ -2880,7 +4199,13 @@
             "written",
             "workload-medium",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Reports suit method + evidence + conclusions; depends on requiring traceability.",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Investigation report with method, evidence table, and justified conclusions.",
+          "assessmentFormatId": "report"
         },
         {
           "formatId": "portfolio",
@@ -2890,7 +4215,13 @@
           "tags": [
             "workload-high",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Supports iterative investigation artefacts over time; depends on verification and curation criteria.",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Portfolio: research log, evidence summaries, reflections, final conclusions.",
+          "assessmentFormatId": "portfolio"
         },
         {
           "formatId": "presentation",
@@ -2901,7 +4232,13 @@
             "oral",
             "group-or-individual",
             "ai-risk-low"
-          ]
+          ],
+          "rationale": "Can communicate findings; depends on requiring evidence and Q&A.",
+          "designNotes": [
+            "Provide data/materials and require use of explicit criteria (patterns, relationships, causes); include at least one boundary/edge case to prevent recall-only responses."
+          ],
+          "taskIdea": "Present investigation findings and defend choices in Q&A.",
+          "assessmentFormatId": "presentation"
         }
       ],
       "tags": [
@@ -2929,6 +4266,76 @@
         "analyse": "Emphasis on interpreting evidence and explaining relationships/causes.",
         "evaluate": "Emphasis on judging evidence quality, method fit, and uncertainty/limits.",
         "create": "Findings inform the design/production of an original output."
+      },
+      "taskIdeasByLevel": {
+        "analyse": [
+          {
+            "title": "Mini research task investigate a question…",
+            "description": "Mini research task: investigate a question, justify method, analyse evidence, and report findings.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Diagnostic investigation investigate a failure collect…",
+            "description": "Diagnostic investigation: investigate a failure, collect logs/evidence, identify root causes.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Workplace style investigation investigate stakeholder needs…",
+            "description": "Workplace-style investigation: investigate stakeholder needs and produce a brief with findings.",
+            "evidenceProduced": []
+          }
+        ],
+        "apply": [
+          {
+            "title": "Mini research task investigate a question…",
+            "description": "Mini research task: investigate a question, justify method, analyse evidence, and report findings.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Diagnostic investigation investigate a failure collect…",
+            "description": "Diagnostic investigation: investigate a failure, collect logs/evidence, identify root causes.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Workplace style investigation investigate stakeholder needs…",
+            "description": "Workplace-style investigation: investigate stakeholder needs and produce a brief with findings.",
+            "evidenceProduced": []
+          }
+        ],
+        "evaluate": [
+          {
+            "title": "Mini research task investigate a question…",
+            "description": "Mini research task: investigate a question, justify method, analyse evidence, and report findings.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Diagnostic investigation investigate a failure collect…",
+            "description": "Diagnostic investigation: investigate a failure, collect logs/evidence, identify root causes.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Workplace style investigation investigate stakeholder needs…",
+            "description": "Workplace-style investigation: investigate stakeholder needs and produce a brief with findings.",
+            "evidenceProduced": []
+          }
+        ],
+        "create": [
+          {
+            "title": "Mini research task investigate a question…",
+            "description": "Mini research task: investigate a question, justify method, analyse evidence, and report findings.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Diagnostic investigation investigate a failure collect…",
+            "description": "Diagnostic investigation: investigate a failure, collect logs/evidence, identify root causes.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Workplace style investigation investigate stakeholder needs…",
+            "description": "Workplace-style investigation: investigate stakeholder needs and produce a brief with findings.",
+            "evidenceProduced": []
+          }
+        ]
       }
     },
     {
@@ -2965,9 +4372,21 @@
         "Evaluate {work/product} and propose improvements based on criteria."
       ],
       "taskIdeas": [
-        "Evaluate two approaches using a weighted criteria matrix and justify the recommendation.",
-        "Evaluate an artefact against a rubric and produce a feedback report with priorities.",
-        "Evaluate an intervention using evidence and discuss limitations/uncertainty."
+        {
+          "title": "Evaluate two approaches using a weighted…",
+          "description": "Evaluate two approaches using a weighted criteria matrix and justify the recommendation.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Evaluate an artefact against a rubric…",
+          "description": "Evaluate an artefact against a rubric and produce a feedback report with priorities.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Evaluate an intervention using evidence and…",
+          "description": "Evaluate an intervention using evidence and discuss limitations/uncertainty.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -2980,7 +4399,13 @@
             "written",
             "ai-risk-low",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Peer review naturally aligns with criteria-based judgement; depends on rubric quality and training.",
+          "designNotes": [
+            "Provide explicit criteria and require a judgement supported by evidence; ensure marks reward reasoning, not just the final choice."
+          ],
+          "taskIdea": "Peer-review using rubric + justification + improvement suggestions.",
+          "assessmentFormatId": "peer-review"
         },
         {
           "formatId": "essay",
@@ -2991,7 +4416,13 @@
             "written",
             "ai-risk-medium",
             "workload-high"
-          ]
+          ],
+          "rationale": "Works when criteria and evidence are explicit; risk of opinion-only without structure.",
+          "designNotes": [
+            "Provide explicit criteria and require a judgement supported by evidence; ensure marks reward reasoning, not just the final choice."
+          ],
+          "taskIdea": "Essay: evaluate theory X using criteria Y and evidence Z.",
+          "assessmentFormatId": "essay"
         },
         {
           "formatId": "oral-viva",
@@ -3002,7 +4433,13 @@
             "oral",
             "ai-risk-low",
             "workload-high"
-          ]
+          ],
+          "rationale": "Allows probing criteria and evidence; depends on artefacts and questioning.",
+          "designNotes": [
+            "Provide explicit criteria and require a judgement supported by evidence; ensure marks reward reasoning, not just the final choice."
+          ],
+          "taskIdea": "Viva: defend your evaluation and respond to counter-arguments.",
+          "assessmentFormatId": "oral-viva"
         },
         {
           "formatId": "report",
@@ -3013,7 +4450,13 @@
             "written",
             "ai-risk-medium",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Reports suit structured evaluation (criteria, evidence, judgement); depends on requiring traceability.",
+          "designNotes": [
+            "Provide explicit criteria and require a judgement supported by evidence; ensure marks reward reasoning, not just the final choice."
+          ],
+          "taskIdea": "Evaluation report including criteria, evidence, judgement, and recommendations.",
+          "assessmentFormatId": "report"
         }
       ],
       "tags": [
@@ -3037,6 +4480,59 @@
         "analyse": "Focus on setting up criteria/evidence and understanding trade-offs; judgement may be tentative.",
         "evaluate": "Explicit criteria + evidence → defended judgement.",
         "create": "Evaluation is used to iterate and improve an original artefact."
+      },
+      "taskIdeasByLevel": {
+        "evaluate": [
+          {
+            "title": "Evaluate two approaches using a weighted…",
+            "description": "Evaluate two approaches using a weighted criteria matrix and justify the recommendation.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Evaluate an artefact against a rubric…",
+            "description": "Evaluate an artefact against a rubric and produce a feedback report with priorities.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Evaluate an intervention using evidence and…",
+            "description": "Evaluate an intervention using evidence and discuss limitations/uncertainty.",
+            "evidenceProduced": []
+          }
+        ],
+        "analyse": [
+          {
+            "title": "Evaluate two approaches using a weighted…",
+            "description": "Evaluate two approaches using a weighted criteria matrix and justify the recommendation.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Evaluate an artefact against a rubric…",
+            "description": "Evaluate an artefact against a rubric and produce a feedback report with priorities.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Evaluate an intervention using evidence and…",
+            "description": "Evaluate an intervention using evidence and discuss limitations/uncertainty.",
+            "evidenceProduced": []
+          }
+        ],
+        "create": [
+          {
+            "title": "Evaluate two approaches using a weighted…",
+            "description": "Evaluate two approaches using a weighted criteria matrix and justify the recommendation.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Evaluate an artefact against a rubric…",
+            "description": "Evaluate an artefact against a rubric and produce a feedback report with priorities.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Evaluate an intervention using evidence and…",
+            "description": "Evaluate an intervention using evidence and discuss limitations/uncertainty.",
+            "evidenceProduced": []
+          }
+        ]
       }
     },
     {
@@ -3074,9 +4570,21 @@
         "Produce {output} and document the process and decisions used."
       ],
       "taskIdeas": [
-        "Produce a short policy brief for a defined audience with constraints on length and evidence.",
-        "Produce a working prototype (code/design) that meets acceptance criteria.",
-        "Produce a portfolio artefact and a short rationale explaining choices made."
+        {
+          "title": "Produce a short policy brief for…",
+          "description": "Produce a short policy brief for a defined audience with constraints on length and evidence.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Produce a working prototype code design…",
+          "description": "Produce a working prototype (code/design) that meets acceptance criteria.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Produce a portfolio artefact and a…",
+          "description": "Produce a portfolio artefact and a short rationale explaining choices made.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -3088,7 +4596,13 @@
             "authenticity-high",
             "workload-high",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Projects support creation of substantive outputs; depends on originality and constraints.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Produce a prototype meeting acceptance criteria + short rationale.",
+          "assessmentFormatId": "project"
         },
         {
           "formatId": "portfolio",
@@ -3098,7 +4612,13 @@
           "tags": [
             "workload-high",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Portfolios evidence production over time; depends on curation and authenticity checks.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Produce multiple artefacts across weeks with reflection and evidence of process.",
+          "assessmentFormatId": "portfolio"
         },
         {
           "formatId": "design-brief",
@@ -3109,7 +4629,13 @@
             "authenticity-high",
             "written",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Briefs can structure production with constraints; depends on evaluating against requirements.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Produce a brief + artefact responding to client constraints.",
+          "assessmentFormatId": "design-brief"
         },
         {
           "formatId": "practical",
@@ -3119,7 +4645,13 @@
           "tags": [
             "practical",
             "ai-risk-low"
-          ]
+          ],
+          "rationale": "Suitable where artefact is produced hands-on; depends on resources and criteria.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Produce {artefact} in a studio/lab session with rubric.",
+          "assessmentFormatId": "practical"
         }
       ],
       "tags": [
@@ -3143,6 +4675,59 @@
         "understand": "Output is primarily representational (shows comprehension).",
         "apply": "Output follows a prescribed method/template; success is correctness/completeness.",
         "create": "Output requires design decisions, integration, and originality within constraints."
+      },
+      "taskIdeasByLevel": {
+        "create": [
+          {
+            "title": "Produce a short policy brief for…",
+            "description": "Produce a short policy brief for a defined audience with constraints on length and evidence.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Produce a working prototype code design…",
+            "description": "Produce a working prototype (code/design) that meets acceptance criteria.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Produce a portfolio artefact and a…",
+            "description": "Produce a portfolio artefact and a short rationale explaining choices made.",
+            "evidenceProduced": []
+          }
+        ],
+        "apply": [
+          {
+            "title": "Produce a short policy brief for…",
+            "description": "Produce a short policy brief for a defined audience with constraints on length and evidence.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Produce a working prototype code design…",
+            "description": "Produce a working prototype (code/design) that meets acceptance criteria.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Produce a portfolio artefact and a…",
+            "description": "Produce a portfolio artefact and a short rationale explaining choices made.",
+            "evidenceProduced": []
+          }
+        ],
+        "understand": [
+          {
+            "title": "Produce a short policy brief for…",
+            "description": "Produce a short policy brief for a defined audience with constraints on length and evidence.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Produce a working prototype code design…",
+            "description": "Produce a working prototype (code/design) that meets acceptance criteria.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Produce a portfolio artefact and a…",
+            "description": "Produce a portfolio artefact and a short rationale explaining choices made.",
+            "evidenceProduced": []
+          }
+        ]
       }
     },
     {
@@ -3180,9 +4765,21 @@
         "Create a novel approach to {problem} and evaluate its effectiveness against criteria."
       ],
       "taskIdeas": [
-        "Create a design proposal for a client with constraints, including rationale and trade-offs.",
-        "Create a working solution and iterate based on testing/feedback.",
-        "Create an intervention plan, justify decisions, and outline evaluation measures."
+        {
+          "title": "Create a design proposal for a…",
+          "description": "Create a design proposal for a client with constraints, including rationale and trade-offs.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Create a working solution and iterate…",
+          "description": "Create a working solution and iterate based on testing/feedback.",
+          "evidenceProduced": []
+        },
+        {
+          "title": "Create an intervention plan justify decisions…",
+          "description": "Create an intervention plan, justify decisions, and outline evaluation measures.",
+          "evidenceProduced": []
+        }
       ],
       "formatMappings": [
         {
@@ -3194,7 +4791,13 @@
             "authenticity-high",
             "workload-high",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Projects allow original creation with constraints and iteration; depends on rubric emphasising decisions and evidence.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Create a solution/prototype; document iterations and decisions.",
+          "assessmentFormatId": "project"
         },
         {
           "formatId": "design-brief",
@@ -3205,7 +4808,13 @@
             "written",
             "authenticity-high",
             "workload-medium"
-          ]
+          ],
+          "rationale": "Briefs capture constraints, audience, and rationale; depends on assessment criteria.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Create a brief + artefact; justify design choices.",
+          "assessmentFormatId": "design-brief"
         },
         {
           "formatId": "portfolio",
@@ -3215,7 +4824,13 @@
           "tags": [
             "workload-high",
             "ai-risk-medium"
-          ]
+          ],
+          "rationale": "Portfolios support iterative creation evidence; depends on authentic process evidence.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Portfolio of drafts, feedback, and final artefact.",
+          "assessmentFormatId": "portfolio"
         },
         {
           "formatId": "presentation",
@@ -3226,7 +4841,13 @@
             "oral",
             "group-or-individual",
             "ai-risk-low"
-          ]
+          ],
+          "rationale": "Presenting a created solution can evidence reasoning; depends on Q&A and artefact quality.",
+          "designNotes": [
+            "Specify constraints, audience, and success criteria; include iterative checkpoints or a brief rationale to evidence intentional design decisions."
+          ],
+          "taskIdea": "Pitch your created solution and defend trade-offs in Q&A.",
+          "assessmentFormatId": "presentation"
         }
       ],
       "tags": [
@@ -3250,6 +4871,59 @@
         "apply": "Creation is largely templated; main demand is correct application and minor adaptation.",
         "evaluate": "Creation includes explicit judgement/refinement cycles based on criteria and evidence.",
         "create": "Emphasis on originality, integration, constraints, and defensible design decisions."
+      },
+      "taskIdeasByLevel": {
+        "create": [
+          {
+            "title": "Create a design proposal for a…",
+            "description": "Create a design proposal for a client with constraints, including rationale and trade-offs.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create a working solution and iterate…",
+            "description": "Create a working solution and iterate based on testing/feedback.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create an intervention plan justify decisions…",
+            "description": "Create an intervention plan, justify decisions, and outline evaluation measures.",
+            "evidenceProduced": []
+          }
+        ],
+        "apply": [
+          {
+            "title": "Create a design proposal for a…",
+            "description": "Create a design proposal for a client with constraints, including rationale and trade-offs.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create a working solution and iterate…",
+            "description": "Create a working solution and iterate based on testing/feedback.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create an intervention plan justify decisions…",
+            "description": "Create an intervention plan, justify decisions, and outline evaluation measures.",
+            "evidenceProduced": []
+          }
+        ],
+        "evaluate": [
+          {
+            "title": "Create a design proposal for a…",
+            "description": "Create a design proposal for a client with constraints, including rationale and trade-offs.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create a working solution and iterate…",
+            "description": "Create a working solution and iterate based on testing/feedback.",
+            "evidenceProduced": []
+          },
+          {
+            "title": "Create an intervention plan justify decisions…",
+            "description": "Create an intervention plan, justify decisions, and outline evaluation measures.",
+            "evidenceProduced": []
+          }
+        ]
       }
     }
   ],
@@ -3312,6 +4986,22 @@
       "high",
       "medium",
       "low"
+    ],
+    "optionalVerbFields": [
+      "taskIdeasByLevel",
+      "diagnosticStrength",
+      "stemsByLevel",
+      "levelGuidance"
+    ],
+    "formatMappingFields": [
+      "formatId",
+      "suitability",
+      "rationale",
+      "designNotes",
+      "taskIdea",
+      "notes",
+      "taskExamples",
+      "tags"
     ]
   }
 }

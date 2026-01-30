@@ -24,6 +24,39 @@
 
 
     <div class="row g-4">
+	<!-- NFQ Guidance (standalone - does not affect Bloom/verbs logic) -->
+<div class="card mb-3" id="nfqGuidanceCard">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <span><strong>NFQ guidance</strong> <span class="text-muted">(tips for the level you’re working at)</span></span>
+  </div>
+
+  <div class="card-body">
+    <div class="row g-2 align-items-end">
+      <div class="col-12 col-md-4">
+        <label for="nfqSelect" class="form-label">Select NFQ level</label>
+        <select id="nfqSelect" class="form-select">
+          <option value="">-- choose --</option>
+          <option value="6">NFQ 6</option>
+          <option value="7">NFQ 7</option>
+          <option value="8">NFQ 8</option>
+          <option value="9">NFQ 9</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-8">
+        <div id="nfqQuickNudge" class="text-muted small">
+          Pick a level to see guidance on appropriate cognitive demand, LO phrasing, and assessment design.
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-3" />
+
+    <div id="nfqTipsArea">
+      <div class="text-muted">No level selected yet.</div>
+    </div>
+  </div>
+</div>
       <!-- Bloom hierarchy: always visible -->
       <div class="col-12 col-lg-4">
         <div class="card shadow-sm">
@@ -105,39 +138,7 @@
             </div>
           </div>
         </div>
-		<!-- NFQ Guidance (standalone - does not affect Bloom/verbs logic) -->
-<div class="card mb-3" id="nfqGuidanceCard">
-  <div class="card-header d-flex align-items-center justify-content-between">
-    <span><strong>NFQ guidance</strong> <span class="text-muted">(tips for the level you’re working at)</span></span>
-  </div>
-
-  <div class="card-body">
-    <div class="row g-2 align-items-end">
-      <div class="col-12 col-md-4">
-        <label for="nfqSelect" class="form-label">Select NFQ level</label>
-        <select id="nfqSelect" class="form-select">
-          <option value="">-- choose --</option>
-          <option value="6">NFQ 6</option>
-          <option value="7">NFQ 7</option>
-          <option value="8">NFQ 8</option>
-          <option value="9">NFQ 9</option>
-        </select>
-      </div>
-
-      <div class="col-12 col-md-8">
-        <div id="nfqQuickNudge" class="text-muted small">
-          Pick a level to see guidance on appropriate cognitive demand, LO phrasing, and assessment design.
-        </div>
-      </div>
-    </div>
-
-    <hr class="my-3" />
-
-    <div id="nfqTipsArea">
-      <div class="text-muted">No level selected yet.</div>
-    </div>
-  </div>
-</div>
+		
 
         <!-- RESULTS -->
         <div class="row mt-4">
