@@ -1,0 +1,3317 @@
+{
+  "meta": {
+    "schema": "blooms-verbs-mapping",
+    "schemaVersion": "2.3.0",
+    "created": "2026-01-30",
+    "author": "Sam Cogan",
+    "license": "internal",
+    "disclaimer": "Mappings are indicative only. Assessment suitability depends on task design, criteria, and context. Use academic judgement.",
+    "updated": "2026-01-30",
+    "changelog": [
+      {
+        "version": "2.3.0",
+        "date": "2026-01-30",
+        "changes": [
+          "Added verbs: describe, apply, perform, analyse, investigate, evaluate, produce, create (multi-level guidance, stems, mappings)."
+        ]
+      },
+      {
+        "version": "2.1.0",
+        "date": "2026-01-30",
+        "changes": [
+          "Expanded verb library across Bloom levels with synonyms, stems, task ideas, and mapping notes.",
+          "Expanded assessment format catalogue with stable IDs and richer metadata/tags.",
+          "Added optional tags for workload/scalability/authenticity/AI-risk and delivery modes.",
+          "Added lightweight compatibility notes and tighter validation rules."
+        ]
+      },
+      {
+        "version": "2.2.0",
+        "date": "2026-01-30",
+        "changes": [
+          "Introduced multi-level verb support via stemsByLevel and levelGuidance (verbs may legitimately fit multiple Bloom levels depending on object and constraints).",
+          "Added diagnosticStrength to help users distinguish verbs that are strongly level-diagnostic vs context-dependent.",
+          "Expanded validationRules to include optional multi-level fields while retaining backwards compatibility."
+        ]
+      }
+    ],
+    "compatibility": {
+      "backwardsCompatibleWith": "2.1.x",
+      "breakingChanges": [],
+      "migrationNotes": [
+        "Existing keys are retained. New fields are optional: meta.changelog, meta.compatibility, assessmentFormats[].tags, verbs[].tags.workloadHint/aiRiskHint/dependsOn.",
+        "allowedSuitabilityValues adds 'context-dependent' (apps that validate strictly should accept this new enum or treat it as 'medium').",
+        "New optional fields on verbs: stemsByLevel (object of levelId -> stems array), levelGuidance (object of levelId -> guidance string), diagnosticStrength ('high'|'medium'|'low'). Existing fields remain unchanged."
+      ]
+    }
+  },
+  "taxonomies": {
+    "bloom": {
+      "id": "bloom-revised",
+      "name": "Bloom’s Taxonomy (Revised)",
+      "levels": [
+        {
+          "id": "remember",
+          "order": 1,
+          "label": "Remember",
+          "shortDefinition": "Recall facts, terms, and basic concepts.",
+          "prompts": [
+            "define",
+            "describe",
+            "identify",
+            "list",
+            "recall"
+          ],
+          "verbGuardrails": {
+            "avoidIfYouMean": [
+              "analyse",
+              "evaluate",
+              "create"
+            ],
+            "commonPitfalls": [
+              "Over-claiming cognitive demand in the LO while assessing only recall."
+            ]
+          }
+        },
+        {
+          "id": "understand",
+          "order": 2,
+          "label": "Understand",
+          "shortDefinition": "Explain ideas or concepts; show comprehension.",
+          "prompts": [
+            "classify",
+            "describe",
+            "explain",
+            "interpret",
+            "summarise"
+          ],
+          "verbGuardrails": {
+            "avoidIfYouMean": [
+              "evaluate"
+            ],
+            "commonPitfalls": [
+              "Confusing 'explain' with critique; no criteria or justification required."
+            ]
+          }
+        },
+        {
+          "id": "apply",
+          "order": 3,
+          "label": "Apply",
+          "shortDefinition": "Use information in new situations; perform procedures.",
+          "prompts": [
+            "apply",
+            "demonstrate",
+            "implement",
+            "perform",
+            "solve",
+            "use"
+          ],
+          "verbGuardrails": {
+            "avoidIfYouMean": [
+              "create"
+            ],
+            "commonPitfalls": [
+              "Calling something 'apply' when it requires judgement and criteria (evaluate)."
+            ]
+          }
+        },
+        {
+          "id": "analyse",
+          "order": 4,
+          "label": "Analyse",
+          "shortDefinition": "Break material into parts; examine relationships and patterns.",
+          "prompts": [
+            "analyse",
+            "compare",
+            "diagnose",
+            "differentiate",
+            "examine",
+            "investigate"
+          ],
+          "verbGuardrails": {
+            "avoidIfYouMean": [
+              "summarise"
+            ],
+            "commonPitfalls": [
+              "Listing differences without explaining significance or relationships."
+            ]
+          }
+        },
+        {
+          "id": "evaluate",
+          "order": 5,
+          "label": "Evaluate",
+          "shortDefinition": "Make judgements using criteria and evidence.",
+          "prompts": [
+            "appraise",
+            "critique",
+            "evaluate",
+            "justify",
+            "recommend"
+          ],
+          "verbGuardrails": {
+            "avoidIfYouMean": [
+              "describe"
+            ],
+            "commonPitfalls": [
+              "Judgement without explicit criteria; opinion-only responses."
+            ]
+          }
+        },
+        {
+          "id": "create",
+          "order": 6,
+          "label": "Create",
+          "shortDefinition": "Produce new or original work by integrating elements.",
+          "prompts": [
+            "compose",
+            "construct",
+            "create",
+            "design",
+            "develop",
+            "produce"
+          ],
+          "verbGuardrails": {
+            "avoidIfYouMean": [
+              "apply"
+            ],
+            "commonPitfalls": [
+              "Renaming templated reproduction as 'create' (no originality/constraints)."
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "assessmentFormats": [
+    {
+      "id": "essay",
+      "label": "Essay",
+      "category": "written",
+      "typicalEvidence": [
+        "structured argument",
+        "justified claims",
+        "use of sources"
+      ],
+      "scalability": {
+        "markingLoad": "medium",
+        "setupLoad": "low"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "draft checkpoints",
+          "oral defence",
+          "in-class component"
+        ]
+      }
+    },
+    {
+      "id": "report",
+      "label": "Report",
+      "category": "written",
+      "typicalEvidence": [
+        "findings",
+        "analysis",
+        "recommendations"
+      ],
+      "scalability": {
+        "markingLoad": "medium",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "data provenance",
+          "appendix of workings",
+          "viva questions"
+        ]
+      }
+    },
+    {
+      "id": "presentation",
+      "label": "Presentation",
+      "category": "oral",
+      "typicalEvidence": [
+        "synthesis",
+        "communication",
+        "defence of decisions"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "low",
+        "mitigations": [
+          "live Q&A",
+          "individual questioning"
+        ]
+      }
+    },
+    {
+      "id": "case-study",
+      "label": "Case Study",
+      "category": "authentic",
+      "typicalEvidence": [
+        "application to context",
+        "analysis",
+        "justified recommendations"
+      ],
+      "scalability": {
+        "markingLoad": "medium",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "unique case data",
+          "reflective commentary",
+          "oral probe"
+        ]
+      }
+    },
+    {
+      "id": "quiz",
+      "label": "Quiz / MCQ",
+      "category": "test",
+      "typicalEvidence": [
+        "recall",
+        "concept checks",
+        "application scenarios (if well designed)"
+      ],
+      "scalability": {
+        "markingLoad": "low",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "high",
+        "mitigations": [
+          "question banks",
+          "timed",
+          "scenario-based items"
+        ]
+      }
+    },
+    {
+      "id": "project",
+      "label": "Project",
+      "category": "authentic",
+      "typicalEvidence": [
+        "artefact",
+        "design decisions",
+        "evaluation against requirements"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "high"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "milestones",
+          "process logs",
+          "demo + viva"
+        ]
+      }
+    },
+    {
+      "id": "portfolio",
+      "label": "Portfolio",
+      "category": "authentic",
+      "typicalEvidence": [
+        "curation",
+        "reflection",
+        "evidence over time"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "high"
+      },
+      "aiRisk": {
+        "likelihood": "low",
+        "mitigations": [
+          "process evidence",
+          "annotated artefacts"
+        ]
+      }
+    },
+    {
+      "id": "practical",
+      "label": "Practical / Skills Demonstration",
+      "category": "practical",
+      "typicalEvidence": [
+        "performance",
+        "procedure",
+        "competence"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "high"
+      },
+      "aiRisk": {
+        "likelihood": "low",
+        "mitigations": [
+          "live observation",
+          "standardised rubric"
+        ]
+      }
+    },
+    {
+      "id": "short-answer",
+      "label": "Short Answer / SAQ",
+      "category": "test",
+      "typicalEvidence": [
+        "concise explanation",
+        "worked example",
+        "justification (brief)"
+      ],
+      "scalability": {
+        "markingLoad": "low",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "high",
+        "mitigations": [
+          "randomised variants",
+          "require workings",
+          "in-class timed component"
+        ]
+      }
+    },
+    {
+      "id": "oral-viva",
+      "label": "Oral Exam / Viva",
+      "category": "oral",
+      "typicalEvidence": [
+        "explanation under questioning",
+        "defence of decisions",
+        "authorship verification"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "low",
+        "mitigations": [
+          "structured question set",
+          "recording",
+          "calibration using rubric"
+        ]
+      },
+      "tags": {
+        "delivery": [
+          "oral"
+        ],
+        "individualDefault": true,
+        "authenticity": "high",
+        "scalableToLargeCohorts": "low"
+      }
+    },
+    {
+      "id": "lab-report",
+      "label": "Lab / Technical Report",
+      "category": "written",
+      "typicalEvidence": [
+        "method",
+        "results",
+        "analysis",
+        "limitations"
+      ],
+      "scalability": {
+        "markingLoad": "medium",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "raw data submission",
+          "lab notebook/process log",
+          "in-lab checks"
+        ]
+      }
+    },
+    {
+      "id": "demo",
+      "label": "Demonstration / Walkthrough",
+      "category": "practical",
+      "typicalEvidence": [
+        "live performance",
+        "explanation of steps",
+        "Q&A"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "low",
+        "mitigations": [
+          "live demo",
+          "questioning on choices",
+          "process log"
+        ]
+      }
+    },
+    {
+      "id": "poster",
+      "label": "Poster",
+      "category": "written",
+      "typicalEvidence": [
+        "visual synthesis",
+        "key findings",
+        "concise argument"
+      ],
+      "scalability": {
+        "markingLoad": "medium",
+        "setupLoad": "low"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "live poster session Q&A",
+          "draft checkpoint",
+          "source annotations"
+        ]
+      }
+    },
+    {
+      "id": "reflection",
+      "label": "Reflective Journal",
+      "category": "authentic",
+      "typicalEvidence": [
+        "reflection on process",
+        "evidence of decisions",
+        "link to criteria/theory"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "low",
+        "mitigations": [
+          "prompted reflection",
+          "artefact annotations",
+          "periodic check-ins"
+        ]
+      }
+    },
+    {
+      "id": "peer-review",
+      "label": "Peer Review / Critique",
+      "category": "authentic",
+      "typicalEvidence": [
+        "criteria-based feedback",
+        "justified suggestions",
+        "evaluation of work quality"
+      ],
+      "scalability": {
+        "markingLoad": "medium",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "anonymous allocation",
+          "rubric for feedback quality",
+          "moderation"
+        ]
+      }
+    },
+    {
+      "id": "design-brief",
+      "label": "Design Brief / Specification",
+      "category": "authentic",
+      "typicalEvidence": [
+        "requirements",
+        "constraints",
+        "rationale",
+        "success criteria"
+      ],
+      "scalability": {
+        "markingLoad": "medium",
+        "setupLoad": "medium"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "context-specific constraints",
+          "milestones",
+          "oral defence"
+        ]
+      }
+    },
+    {
+      "id": "simulation",
+      "label": "Simulation / Role-play",
+      "category": "authentic",
+      "typicalEvidence": [
+        "decision-making in context",
+        "communication",
+        "adaptation"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "high"
+      },
+      "aiRisk": {
+        "likelihood": "low",
+        "mitigations": [
+          "live observation",
+          "structured role cards",
+          "debrief"
+        ]
+      }
+    },
+    {
+      "id": "coding-task",
+      "label": "Coding / Build Task",
+      "category": "practical",
+      "typicalEvidence": [
+        "working solution",
+        "tests",
+        "code quality",
+        "explanation"
+      ],
+      "scalability": {
+        "markingLoad": "high",
+        "setupLoad": "high"
+      },
+      "aiRisk": {
+        "likelihood": "medium",
+        "mitigations": [
+          "unique datasets/tests",
+          "pair viva",
+          "commit history"
+        ]
+      }
+    }
+  ],
+  "verbs": [
+    {
+      "id": "analyse-compare",
+      "verb": "compare",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "analyse",
+      "alsoFitsLevelIds": [
+        "understand",
+        "evaluate"
+      ],
+      "meaning": {
+        "short": "Identify similarities and differences and explain their significance.",
+        "expanded": "Requires examining elements and relationships, not just listing features. Stronger responses explain why similarities/differences matter in context."
+      },
+      "synonyms": [
+        "contrast",
+        "differentiate",
+        "distinguish",
+        "benchmark",
+        "weigh up"
+      ],
+      "searchKeywords": [
+        "comparison",
+        "differences",
+        "similarities",
+        "vs"
+      ],
+      "learningOutcomeStems": [
+        "Compare X and Y using Z criteria to explain key differences in context.",
+        "Compare approaches to X and justify which is most appropriate for scenario Y.",
+        "Compare X and Y by applying agreed criteria and conclude with an evidence-based recommendation.",
+        "Compare the outputs of two methods for X and explain what the differences imply for practice."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Comparative case analysis",
+          "description": "Given two scenarios, compare decisions/outcomes using an explicit framework and explain implications.",
+          "evidenceProduced": [
+            "structured comparison table",
+            "justification paragraph"
+          ]
+        },
+        {
+          "title": "Criteria-based comparison matrix",
+          "description": "Create a comparison matrix of two tools/approaches against 6–8 agreed criteria, then write a short interpretation of what the pattern means.",
+          "evidenceProduced": [
+            "comparison matrix",
+            "interpretive commentary",
+            "criteria justification"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "case-study",
+          "suitability": "high",
+          "rationale": "Cases naturally provide context and competing options; comparison can be anchored to explicit criteria.",
+          "designNotes": [
+            "Provide a comparison framework (e.g., criteria table).",
+            "Require significance/implications to avoid descriptive listing."
+          ]
+        },
+        {
+          "assessmentFormatId": "report",
+          "suitability": "medium",
+          "rationale": "Reports can support structured comparative evaluation if criteria are specified.",
+          "designNotes": [
+            "Include a section heading that explicitly requires comparison against criteria."
+          ]
+        },
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "low",
+          "rationale": "Possible with scenario-based items but often collapses into recall unless carefully designed.",
+          "designNotes": [
+            "Use vignettes + 'best answer' with rationale prompts if supported."
+          ]
+        }
+      ],
+      "tags": {
+        "evidenceType": [
+          "analysis",
+          "justification"
+        ],
+        "delivery": [
+          "written",
+          "oral"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "workloadHint": "medium",
+        "aiRiskHint": "medium",
+        "dependsOn": "making criteria explicit and requiring significance/implications"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "analyse": [
+          "Compare X and Y using Z criteria to explain key differences in context.",
+          "Compare approaches to X and justify which is most appropriate for scenario Y.",
+          "Compare X and Y by applying agreed criteria and conclude with an evidence-based recommendation.",
+          "Compare the outputs of two methods for X and explain what the differences imply for practice."
+        ],
+        "understand": [
+          "Compare X and Y to show how they differ in meaning/definition, using a simple feature list.",
+          "Compare examples of X and Y and explain which features place each example in its category."
+        ],
+        "evaluate": [
+          "Compare options for X against criteria Y and justify a recommended choice for context Z.",
+          "Compare two proposed solutions to X and defend the preferred option by weighing trade-offs and risks."
+        ]
+      },
+      "levelGuidance": {
+        "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications."
+      }
+    },
+    {
+      "id": "remember-define",
+      "verb": "define",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "remember",
+      "alsoFitsLevelIds": [
+        "understand"
+      ],
+      "meaning": {
+        "short": "State the meaning of a term or concept accurately.",
+        "expanded": "Requires accurate recall and clear boundaries (what it is / is not). In many disciplines, a strong definition also includes essential features and a brief example."
+      },
+      "synonyms": [
+        "state",
+        "specify",
+        "give the definition of",
+        "describe (basic)"
+      ],
+      "searchKeywords": [
+        "definition",
+        "terminology",
+        "key term",
+        "meaning"
+      ],
+      "learningOutcomeStems": [
+        "Define X using appropriate disciplinary terminology.",
+        "Define X and give one example and one non-example to show boundaries.",
+        "Define the key terms used in Y and use them consistently in subsequent work."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Glossary of core terms",
+          "description": "Produce a concise glossary of 10–15 module terms with definitions and one example each.",
+          "evidenceProduced": [
+            "glossary entries",
+            "examples/non-examples"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "high",
+          "rationale": "Well-designed items can check precise recall of terminology quickly at scale.",
+          "designNotes": [
+            "Prefer application-flavoured items (short scenarios) to reduce pure memorisation.",
+            "Use item analysis to remove ambiguous distractors."
+          ]
+        },
+        {
+          "assessmentFormatId": "short-answer",
+          "suitability": "high",
+          "rationale": "Short responses allow checking accuracy while requiring learners to generate (not recognise) definitions.",
+          "designNotes": [
+            "Require an example/non-example to reduce rote copying.",
+            "Use tight word limits and marking keys."
+          ]
+        },
+        {
+          "assessmentFormatId": "portfolio",
+          "suitability": "low",
+          "rationale": "Portfolios can include definitions but are rarely the most efficient main evidence for recall.",
+          "designNotes": [
+            "If used, embed definitions inside artefact annotations rather than standalone lists."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written"
+        ],
+        "authenticity": "low",
+        "groupSuitable": false,
+        "scalableToLargeCohorts": "high",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "remember": [
+          "Define X using appropriate disciplinary terminology.",
+          "Define X and give one example and one non-example to show boundaries.",
+          "Define the key terms used in Y and use them consistently in subsequent work."
+        ],
+        "understand": [
+          "Define X using appropriate disciplinary terminology.",
+          "Define X and give one example and one non-example to show boundaries."
+        ]
+      },
+      "levelGuidance": {
+        "remember": "Focus on accurate recall/recognition with minimal interpretation.",
+        "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      }
+    },
+    {
+      "id": "remember-identify",
+      "verb": "identify",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "remember",
+      "alsoFitsLevelIds": [
+        "understand"
+      ],
+      "meaning": {
+        "short": "Recognise and select relevant elements from a set.",
+        "expanded": "Often evidence is in selection/labeling. To push beyond guesswork, require a brief justification or cue recognition with authentic artefacts."
+      },
+      "synonyms": [
+        "recognise",
+        "label",
+        "pick out",
+        "name"
+      ],
+      "searchKeywords": [
+        "spot",
+        "label",
+        "recognition",
+        "classify (basic)"
+      ],
+      "learningOutcomeStems": [
+        "Identify X in Y (e.g., features, components, issues) from the provided material.",
+        "Identify the key assumptions in argument X.",
+        "Identify the data types and variables required to solve problem Y."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Annotation task",
+          "description": "Annotate a provided artefact (text, code, diagram) by identifying specified elements and briefly noting why each qualifies.",
+          "evidenceProduced": [
+            "annotated artefact",
+            "brief notes"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "high",
+          "rationale": "Image-/scenario-based items can check recognition efficiently if authenticity is baked in.",
+          "designNotes": [
+            "Use artefact snippets (charts, short code, screenshots).",
+            "Avoid trivial 'spot the word' items."
+          ]
+        },
+        {
+          "assessmentFormatId": "short-answer",
+          "suitability": "medium",
+          "rationale": "Short answers can require learners to point to and name elements, with minimal justification.",
+          "designNotes": [
+            "Ask for 'identify + one sentence why' to reduce random selection."
+          ]
+        },
+        {
+          "assessmentFormatId": "practical",
+          "suitability": "medium",
+          "rationale": "In skills contexts, identification can be observed during performance (e.g., selecting correct tool/setting).",
+          "designNotes": [
+            "Use checklist + brief probing questions."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written",
+          "practical"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "high",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "remember": [
+          "Identify X in Y (e.g., features, components, issues) from the provided material.",
+          "Identify the key assumptions in argument X.",
+          "Identify the data types and variables required to solve problem Y."
+        ],
+        "understand": [
+          "Identify X in Y (e.g., features, components, issues) from the provided material.",
+          "Identify the key assumptions in argument X."
+        ]
+      },
+      "levelGuidance": {
+        "remember": "Focus on accurate recall/recognition with minimal interpretation.",
+        "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      }
+    },
+    {
+      "id": "understand-explain",
+      "verb": "explain",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "understand",
+      "alsoFitsLevelIds": [
+        "analyse"
+      ],
+      "meaning": {
+        "short": "Make an idea clear by describing how or why it works.",
+        "expanded": "Strong explanations connect concepts, include causal language, and use appropriate examples. The cognitive demand rises if explanation is anchored to evidence, mechanisms, or a specific context."
+      },
+      "synonyms": [
+        "clarify",
+        "interpret",
+        "make sense of",
+        "account for"
+      ],
+      "searchKeywords": [
+        "why",
+        "how",
+        "mechanism",
+        "because",
+        "rationale"
+      ],
+      "learningOutcomeStems": [
+        "Explain how X works and illustrate your explanation with an example.",
+        "Explain why X leads to Y in the given context, using evidence from Z.",
+        "Explain the trade-offs between X and Y for audience Z."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Teach-back video (micro)",
+          "description": "Record a 3–5 minute teach-back explaining a concept to a novice audience, using one worked example.",
+          "evidenceProduced": [
+            "short video",
+            "worked example slide/notes"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "short-answer",
+          "suitability": "high",
+          "rationale": "Prompts can demand causal/relational explanation in a constrained space, reducing waffle.",
+          "designNotes": [
+            "Use 'because' prompts and require an example.",
+            "Mark for accuracy + coherence + example relevance."
+          ]
+        },
+        {
+          "assessmentFormatId": "presentation",
+          "suitability": "medium",
+          "rationale": "Oral explanation can reveal understanding through questioning and clarification.",
+          "designNotes": [
+            "Include live questions that test transfer to a new example."
+          ]
+        },
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "low",
+          "rationale": "Possible via extended response items but typical MCQ designs assess recognition rather than explanation.",
+          "designNotes": [
+            "If used, include short-answer explanation items rather than pure MCQ."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written",
+          "oral"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "understand": [
+          "Explain how X works and illustrate your explanation with an example.",
+          "Explain why X leads to Y in the given context, using evidence from Z.",
+          "Explain the trade-offs between X and Y for audience Z."
+        ],
+        "analyse": [
+          "Explain how X leads to Y by analysing the mechanism and linking each step to evidence from Z.",
+          "Explain differences in outcomes across cases by analysing underlying assumptions, variables, or conditions."
+        ]
+      },
+      "levelGuidance": {
+        "understand": "Focus on explaining meaning/mechanisms or summarising with fidelity; avoid judgement unless criteria are provided.",
+        "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      }
+    },
+    {
+      "id": "understand-summarise",
+      "verb": "summarise",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "understand",
+      "alsoFitsLevelIds": [
+        "analyse"
+      ],
+      "meaning": {
+        "short": "Condense material to its essential points without distorting meaning.",
+        "expanded": "A good summary prioritises key ideas, maintains logical order, and uses the learner’s own structuring. Cognitive demand increases when summarising for a purpose or audience."
+      },
+      "synonyms": [
+        "paraphrase",
+        "synthesise (basic)",
+        "outline",
+        "abstract"
+      ],
+      "searchKeywords": [
+        "key points",
+        "gist",
+        "overview",
+        "TL;DR"
+      ],
+      "learningOutcomeStems": [
+        "Summarise X for audience Y in no more than Z words, retaining the key argument and evidence.",
+        "Summarise the main findings of X and state their implications for Y.",
+        "Summarise the steps of process X as a reusable checklist."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Executive summary",
+          "description": "Write an executive summary of a report/paper, including 3 implications/recommendations for a specified stakeholder.",
+          "evidenceProduced": [
+            "executive summary",
+            "implications list"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "report",
+          "suitability": "high",
+          "rationale": "Reports often require concise summaries and can be assessed for relevance, coherence, and fidelity.",
+          "designNotes": [
+            "Specify audience and purpose.",
+            "Use word limits and a marking key for 'essential points'."
+          ]
+        },
+        {
+          "assessmentFormatId": "poster",
+          "suitability": "medium",
+          "rationale": "Posters demand concise selection and visual prioritisation of key ideas.",
+          "designNotes": [
+            "Require a short narrative caption plus a visual structure."
+          ]
+        },
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "low",
+          "rationale": "Quizzes can check recognition of main ideas but not the ability to summarise authentically.",
+          "designNotes": [
+            "If used, include short constructed responses."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "high"
+      },
+      "diagnosticStrength": "medium",
+      "stemsByLevel": {
+        "understand": [
+          "Summarise X for audience Y in no more than Z words, retaining the key argument and evidence.",
+          "Summarise the main findings of X and state their implications for Y.",
+          "Summarise the steps of process X as a reusable checklist."
+        ],
+        "analyse": [
+          "Summarise X and highlight the underlying structure (claims, evidence, assumptions) and what it implies for Y.",
+          "Summarise the patterns in dataset X and explain what the trend suggests for decision Y."
+        ]
+      },
+      "levelGuidance": {
+        "understand": "Focus on explaining meaning/mechanisms or summarising with fidelity; avoid judgement unless criteria are provided.",
+        "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      }
+    },
+    {
+      "id": "apply-demonstrate",
+      "verb": "demonstrate",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "apply",
+      "alsoFitsLevelIds": [
+        "understand"
+      ],
+      "meaning": {
+        "short": "Show you can carry out a procedure or use a method correctly.",
+        "expanded": "Requires observable performance or a worked example. Strong evidence includes correct sequencing, appropriate tool choice, and explanation of decisions where relevant."
+      },
+      "synonyms": [
+        "perform",
+        "show",
+        "execute",
+        "carry out"
+      ],
+      "searchKeywords": [
+        "worked example",
+        "procedure",
+        "steps",
+        "how-to"
+      ],
+      "learningOutcomeStems": [
+        "Demonstrate how to use X to achieve Y, following appropriate safety/quality requirements.",
+        "Demonstrate the method for solving X, showing your workings at each step.",
+        "Demonstrate correct use of X in scenario Y and explain key choices."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Guided practical + short probe",
+          "description": "Complete a practical task while being observed, followed by 3–5 probing questions about choices and alternatives.",
+          "evidenceProduced": [
+            "performance checklist",
+            "probe answers"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "practical",
+          "suitability": "high",
+          "rationale": "Direct observation is the cleanest evidence of procedural performance and competence.",
+          "designNotes": [
+            "Use an analytic rubric and standardised conditions.",
+            "Include brief probing questions for decision points."
+          ]
+        },
+        {
+          "assessmentFormatId": "demo",
+          "suitability": "high",
+          "rationale": "A walkthrough/demo captures both doing and explaining, supporting judgement of understanding and skill.",
+          "designNotes": [
+            "Require live or recorded narration with checkpoints.",
+            "Ask for a short 'what would you do if…' variant question."
+          ]
+        },
+        {
+          "assessmentFormatId": "lab-report",
+          "suitability": "medium",
+          "rationale": "Reports can evidence method use, but may miss whether the learner can actually perform under constraints.",
+          "designNotes": [
+            "Pair with raw outputs/logs or in-lab checks."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "practical",
+          "oral",
+          "written"
+        ],
+        "authenticity": "high",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "low",
+        "aiRisk": "low"
+      },
+      "diagnosticStrength": "medium",
+      "stemsByLevel": {
+        "apply": [
+          "Demonstrate how to use X to achieve Y, following appropriate safety/quality requirements.",
+          "Demonstrate the method for solving X, showing your workings at each step.",
+          "Demonstrate correct use of X in scenario Y and explain key choices."
+        ],
+        "understand": [
+          "Demonstrate how to use X to achieve Y, following appropriate safety/quality requirements.",
+          "Demonstrate the method for solving X, showing your workings at each step."
+        ]
+      },
+      "levelGuidance": {
+        "apply": "Focus on correct method/procedure in a new situation; include evidence of workings/performance.",
+        "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      }
+    },
+    {
+      "id": "apply-implement",
+      "verb": "implement",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "apply",
+      "alsoFitsLevelIds": [
+        "create"
+      ],
+      "meaning": {
+        "short": "Put a plan, method, or solution into operation.",
+        "expanded": "Typically requires building, configuring, or executing something in a real or simulated environment. Evidence improves with tests, constraints, and traceability from requirements to outcomes."
+      },
+      "synonyms": [
+        "apply",
+        "execute",
+        "deploy",
+        "put into practice"
+      ],
+      "searchKeywords": [
+        "build",
+        "configure",
+        "run",
+        "deploy"
+      ],
+      "learningOutcomeStems": [
+        "Implement X to meet Y requirements, and verify it using Z tests/criteria.",
+        "Implement a solution to X and document the steps so another person could reproduce it.",
+        "Implement improvements to X based on feedback and explain what changed and why."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Build + test",
+          "description": "Implement a solution and submit a short test plan with evidence of results against requirements.",
+          "evidenceProduced": [
+            "working artefact",
+            "tests/results",
+            "short rationale"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "coding-task",
+          "suitability": "high",
+          "rationale": "Build tasks produce direct artefacts and allow verification through tests and constraints.",
+          "designNotes": [
+            "Provide unique test cases/datasets.",
+            "Require commit history or process log."
+          ]
+        },
+        {
+          "assessmentFormatId": "project",
+          "suitability": "high",
+          "rationale": "Projects allow implementing over time with milestones and evaluation against requirements.",
+          "designNotes": [
+            "Use milestone submissions and a final demo/viva."
+          ]
+        },
+        {
+          "assessmentFormatId": "report",
+          "suitability": "medium",
+          "rationale": "Reports can document implementation decisions and verification, but need accompanying artefacts.",
+          "designNotes": [
+            "Require linking to artefact + evidence (screenshots, logs, outputs)."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "practical",
+          "written"
+        ],
+        "authenticity": "high",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "medium",
+      "stemsByLevel": {
+        "apply": [
+          "Implement X to meet Y requirements, and verify it using Z tests/criteria.",
+          "Implement a solution to X and document the steps so another person could reproduce it.",
+          "Implement improvements to X based on feedback and explain what changed and why."
+        ],
+        "create": [
+          "Implement a novel variant of X that meets specified constraints, and justify design choices made during implementation.",
+          "Implement X and extend it with an additional feature that addresses a new requirement, documenting trade-offs."
+        ]
+      },
+      "levelGuidance": {
+        "apply": "Focus on correct method/procedure in a new situation; include evidence of workings/performance.",
+        "create": "Require an artefact under constraints with rationale/iteration."
+      }
+    },
+    {
+      "id": "analyse-diagnose",
+      "verb": "diagnose",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "analyse",
+      "alsoFitsLevelIds": [
+        "evaluate"
+      ],
+      "meaning": {
+        "short": "Determine the cause of a problem by examining evidence and patterns.",
+        "expanded": "Requires interpreting signals, narrowing plausible causes, and justifying the conclusion. Strong tasks include incomplete information and require documenting the reasoning trail."
+      },
+      "synonyms": [
+        "troubleshoot",
+        "investigate",
+        "determine cause",
+        "isolate"
+      ],
+      "searchKeywords": [
+        "root cause",
+        "debug",
+        "fault",
+        "symptoms",
+        "evidence"
+      ],
+      "learningOutcomeStems": [
+        "Diagnose the cause of X using evidence from Y and propose a justified fix.",
+        "Diagnose performance issues in X by analysing logs/metrics and prioritising likely causes.",
+        "Diagnose common misconceptions in Y and explain how you identified them."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Fault-finding scenario",
+          "description": "Given a broken system/case with artefacts (logs, readings, transcripts), diagnose the most likely cause and justify your reasoning path.",
+          "evidenceProduced": [
+            "diagnosis",
+            "evidence table",
+            "reasoning trail",
+            "proposed fix"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "case-study",
+          "suitability": "high",
+          "rationale": "Cases provide realistic symptom sets and context for evidence-based diagnosis.",
+          "designNotes": [
+            "Include messy/partial data and require documenting reasoning.",
+            "Ask learners to rule out alternatives."
+          ]
+        },
+        {
+          "assessmentFormatId": "practical",
+          "suitability": "high",
+          "rationale": "Live troubleshooting can show authentic diagnostic reasoning and skill under constraints.",
+          "designNotes": [
+            "Use standard fault sets and observation checklist.",
+            "Probe 'why not X' alternatives."
+          ]
+        },
+        {
+          "assessmentFormatId": "report",
+          "suitability": "medium",
+          "rationale": "Reports can document diagnostic reasoning clearly if evidence is provided and referenced.",
+          "designNotes": [
+            "Require a structured 'evidence → inference → conclusion' table."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "practical",
+          "written",
+          "oral"
+        ],
+        "authenticity": "high",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "low",
+        "aiRisk": "low"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "analyse": [
+          "Diagnose the cause of X using evidence from Y and propose a justified fix.",
+          "Diagnose performance issues in X by analysing logs/metrics and prioritising likely causes.",
+          "Diagnose common misconceptions in Y and explain how you identified them."
+        ],
+        "evaluate": [
+          "Diagnose the likely cause of X and justify your conclusion by weighing competing explanations against evidence.",
+          "Diagnose X and evaluate the impact of alternative fixes, recommending the most appropriate intervention."
+        ]
+      },
+      "levelGuidance": {
+        "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications.",
+        "evaluate": "Require judgement using criteria and evidence; include limitations/counterarguments."
+      }
+    },
+    {
+      "id": "analyse-examine",
+      "verb": "examine",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "analyse",
+      "alsoFitsLevelIds": [
+        "understand"
+      ],
+      "meaning": {
+        "short": "Investigate something closely to reveal structure, relationships, or implications.",
+        "expanded": "Higher demand tasks specify what to look for (patterns, assumptions, relationships) and require a conclusion about significance or implications."
+      },
+      "synonyms": [
+        "inspect",
+        "analyse",
+        "probe",
+        "explore"
+      ],
+      "searchKeywords": [
+        "investigate",
+        "pattern",
+        "assumption",
+        "relationship"
+      ],
+      "learningOutcomeStems": [
+        "Examine X to identify patterns/assumptions and explain their implications for Y.",
+        "Examine the evidence for claim X and explain what it supports and what it does not.",
+        "Examine how changes in X influence Y using the provided data."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Evidence examination memo",
+          "description": "Write a short memo examining a set of evidence artefacts and concluding what they imply for a decision.",
+          "evidenceProduced": [
+            "memo",
+            "evidence annotations"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "report",
+          "suitability": "high",
+          "rationale": "Reports/memos support structured examination of evidence and explicit implications.",
+          "designNotes": [
+            "Provide a template: observations → interpretation → implications."
+          ]
+        },
+        {
+          "assessmentFormatId": "essay",
+          "suitability": "medium",
+          "rationale": "Essays can support examination, but need clear prompts to avoid descriptive narratives.",
+          "designNotes": [
+            "Require explicit use of evidence and a 'what this means' section."
+          ]
+        },
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "low",
+          "rationale": "Hard to evidence 'examine' via typical MCQ without extended responses and artefacts.",
+          "designNotes": [
+            "Use short-answer on artefact snippets if needed."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "analyse": [
+          "Examine X to identify patterns/assumptions and explain their implications for Y.",
+          "Examine the evidence for claim X and explain what it supports and what it does not.",
+          "Examine how changes in X influence Y using the provided data."
+        ],
+        "understand": [
+          "Examine X to identify patterns/assumptions and explain their implications for Y.",
+          "Examine the evidence for claim X and explain what it supports and what it does not."
+        ]
+      },
+      "levelGuidance": {
+        "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications.",
+        "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      }
+    },
+    {
+      "id": "evaluate-justify",
+      "verb": "justify",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "evaluate",
+      "alsoFitsLevelIds": [
+        "analyse"
+      ],
+      "meaning": {
+        "short": "Provide reasons and evidence to support a decision or claim.",
+        "expanded": "Requires explicit criteria or warrants, and evidence that is relevant and sufficient. Strong tasks ask learners to address counterarguments or alternatives."
+      },
+      "synonyms": [
+        "defend",
+        "support",
+        "argue for",
+        "rationalise"
+      ],
+      "searchKeywords": [
+        "reasons",
+        "evidence",
+        "criteria",
+        "because"
+      ],
+      "learningOutcomeStems": [
+        "Justify a recommendation for X using criteria Y and evidence from Z.",
+        "Justify your chosen method for X by comparing alternatives against agreed criteria.",
+        "Justify the limitations of approach X and explain how you mitigated them."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Recommendation brief",
+          "description": "Choose between options, justify your choice against criteria, and include a short 'risks and mitigations' section.",
+          "evidenceProduced": [
+            "brief",
+            "criteria table",
+            "evidence citations"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "report",
+          "suitability": "high",
+          "rationale": "Reports can require explicit criteria, evidence, and a clear recommendation trace.",
+          "designNotes": [
+            "Require criteria table and explicit references to evidence.",
+            "Include counterargument section."
+          ]
+        },
+        {
+          "assessmentFormatId": "presentation",
+          "suitability": "medium",
+          "rationale": "Oral defence with Q&A tests whether justification holds under probing.",
+          "designNotes": [
+            "Use structured Q&A aligned to criteria.",
+            "Ask for trade-offs and alternatives."
+          ]
+        },
+        {
+          "assessmentFormatId": "oral-viva",
+          "suitability": "high",
+          "rationale": "A viva is strong for validating authorship and depth of reasoning behind justifications.",
+          "designNotes": [
+            "Ask learners to apply criteria to a new mini-scenario."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written",
+          "oral"
+        ],
+        "authenticity": "high",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "low",
+        "aiRisk": "low"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "evaluate": [
+          "Justify a recommendation for X using criteria Y and evidence from Z.",
+          "Justify your chosen method for X by comparing alternatives against agreed criteria.",
+          "Justify the limitations of approach X and explain how you mitigated them."
+        ],
+        "analyse": [
+          "Justify a recommendation for X using criteria Y and evidence from Z.",
+          "Justify your chosen method for X by comparing alternatives against agreed criteria."
+        ]
+      },
+      "levelGuidance": {
+        "evaluate": "Focus on judgement using explicit criteria and evidence; include trade-offs, limitations, or counterarguments.",
+        "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      }
+    },
+    {
+      "id": "evaluate-critique",
+      "verb": "critique",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "evaluate",
+      "alsoFitsLevelIds": [
+        "analyse"
+      ],
+      "meaning": {
+        "short": "Evaluate strengths and weaknesses using criteria and evidence.",
+        "expanded": "A critique is more than opinion: it applies explicit standards, weighs evidence, and often proposes improvements. Strong critiques balance positives and negatives and justify each point."
+      },
+      "synonyms": [
+        "appraise",
+        "review",
+        "evaluate",
+        "assess"
+      ],
+      "searchKeywords": [
+        "strengths",
+        "weaknesses",
+        "criteria",
+        "limitations",
+        "improvements"
+      ],
+      "learningOutcomeStems": [
+        "Critique X using criteria Y and evidence from Z, and propose improvements.",
+        "Critique the methodology of X and explain how limitations affect conclusions.",
+        "Critique two approaches to X and recommend one for scenario Y."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Structured peer review",
+          "description": "Critique a peer artefact using a rubric, then write a short revision plan for improvements.",
+          "evidenceProduced": [
+            "rubric-scored critique",
+            "revision plan"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "peer-review",
+          "suitability": "high",
+          "rationale": "Peer review naturally aligns to criteria-based critique and can scale with moderation.",
+          "designNotes": [
+            "Provide a rubric and exemplars of good feedback.",
+            "Assess quality of feedback, not just the artefact."
+          ]
+        },
+        {
+          "assessmentFormatId": "essay",
+          "suitability": "medium",
+          "rationale": "Essays can support nuanced critique when criteria are explicit and evidence is required.",
+          "designNotes": [
+            "Require a 'criteria + evidence' structure and improvement suggestions."
+          ]
+        },
+        {
+          "assessmentFormatId": "presentation",
+          "suitability": "medium",
+          "rationale": "Oral critique with Q&A can surface depth and ability to respond to challenge.",
+          "designNotes": [
+            "Use timed segments: critique + improvement + defence."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written",
+          "oral"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "evaluate": [
+          "Critique X using criteria Y and evidence from Z, and propose improvements.",
+          "Critique the methodology of X and explain how limitations affect conclusions.",
+          "Critique two approaches to X and recommend one for scenario Y."
+        ],
+        "analyse": [
+          "Critique X using criteria Y and evidence from Z, and propose improvements.",
+          "Critique the methodology of X and explain how limitations affect conclusions."
+        ]
+      },
+      "levelGuidance": {
+        "evaluate": "Focus on judgement using explicit criteria and evidence; include trade-offs, limitations, or counterarguments.",
+        "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      }
+    },
+    {
+      "id": "create-design",
+      "verb": "design",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "create",
+      "alsoFitsLevelIds": [
+        "apply",
+        "evaluate"
+      ],
+      "meaning": {
+        "short": "Plan and specify a solution that meets requirements and constraints.",
+        "expanded": "Design implies making and justifying choices under constraints (requirements, audience, context). Strong evidence includes rationale, trade-offs, and evaluation against success criteria."
+      },
+      "synonyms": [
+        "devise",
+        "plan",
+        "architect",
+        "propose"
+      ],
+      "searchKeywords": [
+        "requirements",
+        "constraints",
+        "specification",
+        "blueprint"
+      ],
+      "learningOutcomeStems": [
+        "Design X for audience Y that meets requirements Z, and justify key design decisions.",
+        "Design a solution to X with constraints Y, including success criteria and an evaluation plan.",
+        "Design an improved version of X based on evidence from user needs and testing."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Design brief + prototype",
+          "description": "Create a design brief with requirements and constraints, then produce a low-fidelity prototype and rationale.",
+          "evidenceProduced": [
+            "design brief",
+            "prototype",
+            "rationale",
+            "evaluation plan"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "design-brief",
+          "suitability": "high",
+          "rationale": "A brief/spec captures requirements, constraints, and rationale—core design evidence.",
+          "designNotes": [
+            "Require explicit success criteria and trade-offs.",
+            "Include an evaluation plan (how you’ll judge it)."
+          ]
+        },
+        {
+          "assessmentFormatId": "project",
+          "suitability": "high",
+          "rationale": "Projects allow design choices to be tested and iterated with feedback over time.",
+          "designNotes": [
+            "Use milestones: requirements → prototype → test → refine.",
+            "Require process evidence."
+          ]
+        },
+        {
+          "assessmentFormatId": "portfolio",
+          "suitability": "medium",
+          "rationale": "Portfolios can show iterative design development and reflection across artefacts.",
+          "designNotes": [
+            "Require versioning and annotations that explain decisions and changes."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written",
+          "practical",
+          "oral"
+        ],
+        "authenticity": "high",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "create": [
+          "Design X for audience Y that meets requirements Z, and justify key design decisions.",
+          "Design a solution to X with constraints Y, including success criteria and an evaluation plan.",
+          "Design an improved version of X based on evidence from user needs and testing."
+        ],
+        "apply": [
+          "Design a workflow for X by applying the given template/standard, ensuring all required elements are present.",
+          "Design an artefact using provided constraints and exemplars, demonstrating correct use of the chosen method."
+        ],
+        "evaluate": [
+          "Design X and evaluate it against success criteria, proposing refinements based on the evaluation.",
+          "Design two alternatives for X and evaluate which better meets stakeholder needs, justifying trade-offs."
+        ]
+      },
+      "levelGuidance": {
+        "create": "Focus on producing an artefact under constraints; include rationale, iteration, and success criteria.",
+        "apply": "Require correct method/procedure; show workings or performance.",
+        "evaluate": "Require judgement using criteria and evidence; include limitations/counterarguments."
+      }
+    },
+    {
+      "id": "create-develop",
+      "verb": "develop",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "create",
+      "alsoFitsLevelIds": [
+        "apply"
+      ],
+      "meaning": {
+        "short": "Build and refine an artefact by integrating components into a coherent whole.",
+        "expanded": "Develop implies iteration and improvement, often informed by feedback, testing, or evaluation. Evidence should show progression, not just a final product."
+      },
+      "synonyms": [
+        "build",
+        "construct",
+        "produce",
+        "create"
+      ],
+      "searchKeywords": [
+        "prototype",
+        "iteration",
+        "version",
+        "refine"
+      ],
+      "learningOutcomeStems": [
+        "Develop X to meet Y requirements, documenting iterations and the reasoning behind changes.",
+        "Develop a prototype for X and refine it based on feedback/testing results.",
+        "Develop documentation/support materials that enable others to use X effectively."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Iterative build with milestones",
+          "description": "Submit three milestone versions of an artefact, each with a short change log and justification based on feedback or testing.",
+          "evidenceProduced": [
+            "artefact versions",
+            "change log",
+            "test/feedback evidence"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "project",
+          "suitability": "high",
+          "rationale": "Projects support iterative development with milestones and multiple evidence points.",
+          "designNotes": [
+            "Require staged submissions and an evaluation at each stage.",
+            "Include demo and short viva for authorship."
+          ]
+        },
+        {
+          "assessmentFormatId": "portfolio",
+          "suitability": "high",
+          "rationale": "Portfolios can capture development over time with annotations and reflection.",
+          "designNotes": [
+            "Require curated evidence of iterations and decision points."
+          ]
+        },
+        {
+          "assessmentFormatId": "coding-task",
+          "suitability": "medium",
+          "rationale": "Build tasks can evidence development if version history and tests are required.",
+          "designNotes": [
+            "Require repository link, commits, and automated tests."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "practical",
+          "written"
+        ],
+        "authenticity": "high",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "create": [
+          "Develop X to meet Y requirements, documenting iterations and the reasoning behind changes.",
+          "Develop a prototype for X and refine it based on feedback/testing results.",
+          "Develop documentation/support materials that enable others to use X effectively."
+        ],
+        "apply": [
+          "Develop X to meet Y requirements, documenting iterations and the reasoning behind changes.",
+          "Develop a prototype for X and refine it based on feedback/testing results."
+        ]
+      },
+      "levelGuidance": {
+        "create": "Focus on producing an artefact under constraints; include rationale, iteration, and success criteria.",
+        "apply": "Require correct method/procedure; show workings or performance."
+      }
+    },
+    {
+      "id": "remember-list",
+      "verb": "list",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "remember",
+      "alsoFitsLevelIds": [
+        "understand"
+      ],
+      "meaning": {
+        "short": "Produce a set of relevant items without necessarily explaining them.",
+        "expanded": "Listing is recall-focused unless you specify criteria for inclusion or require grouping. For better quality evidence, ask learners to organise the list (e.g., by category) or to add brief descriptors."
+      },
+      "synonyms": [
+        "enumerate",
+        "itemise",
+        "name",
+        "compile"
+      ],
+      "searchKeywords": [
+        "inventory",
+        "bullets",
+        "enumeration"
+      ],
+      "learningOutcomeStems": [
+        "List the key components of X.",
+        "List the steps in process X in the correct order.",
+        "List common risks/issues in X and (optionally) group them into categories."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Checklist creation",
+          "description": "Create a checklist of required steps/components for a task, then map each item to where it appears in a provided example.",
+          "evidenceProduced": [
+            "checklist",
+            "mapping notes"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "high",
+          "rationale": "Objective items can assess recall of correct items efficiently.",
+          "designNotes": [
+            "Use 'select all that apply' sparingly; prefer constructed responses or scenario-based recall."
+          ]
+        },
+        {
+          "assessmentFormatId": "short-answer",
+          "suitability": "high",
+          "rationale": "Constructed listing reduces guessing compared to recognition.",
+          "designNotes": [
+            "Specify expected count/range to guide completeness.",
+            "Allow partial credit for partially correct sets."
+          ]
+        },
+        {
+          "assessmentFormatId": "portfolio",
+          "suitability": "low",
+          "rationale": "Portfolios can include lists but are not primarily designed for recall evidence.",
+          "designNotes": [
+            "If used, embed lists as part of artefact annotations/checklists."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written"
+        ],
+        "authenticity": "low",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "high",
+        "aiRisk": "high"
+      },
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "remember": [
+          "List the key components of X.",
+          "List the steps in process X in the correct order.",
+          "List common risks/issues in X and (optionally) group them into categories."
+        ],
+        "understand": [
+          "List the key components of X.",
+          "List the steps in process X in the correct order."
+        ]
+      },
+      "levelGuidance": {
+        "remember": "Focus on accurate recall/recognition with minimal interpretation.",
+        "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      }
+    },
+    {
+      "id": "understand-classify",
+      "verb": "classify",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "understand",
+      "alsoFitsLevelIds": [
+        "analyse"
+      ],
+      "meaning": {
+        "short": "Sort items into categories based on shared features or rules.",
+        "expanded": "Classification requires understanding category definitions and applying them consistently. Strong evidence includes explaining boundary cases or justifying why items belong in categories."
+      },
+      "synonyms": [
+        "categorise",
+        "group",
+        "sort",
+        "organise"
+      ],
+      "searchKeywords": [
+        "categories",
+        "taxonomy",
+        "grouping",
+        "labeling"
+      ],
+      "learningOutcomeStems": [
+        "Classify X into Y categories and justify your categorisations using defined criteria.",
+        "Classify examples of X and explain which features determined your decision.",
+        "Classify common errors in X and propose one prevention strategy per category."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Sorting with boundary cases",
+          "description": "Classify a set of examples including tricky boundary cases, then explain two decisions where classification was ambiguous.",
+          "evidenceProduced": [
+            "classified set",
+            "justification notes"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "short-answer",
+          "suitability": "high",
+          "rationale": "Short responses can capture both classification and brief justification.",
+          "designNotes": [
+            "Include boundary cases and require justification for at least two items."
+          ]
+        },
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "medium",
+          "rationale": "Possible with scenario-based items, but justification is limited in typical MCQ.",
+          "designNotes": [
+            "Use matching/drag-drop plus a short 'why' item if your platform allows."
+          ]
+        },
+        {
+          "assessmentFormatId": "case-study",
+          "suitability": "medium",
+          "rationale": "Cases can require classifying issues/types before proposing action, making the task more authentic.",
+          "designNotes": [
+            "Make classification consequential: it should change the recommended response."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "high",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "medium",
+      "stemsByLevel": {
+        "understand": [
+          "Classify X into Y categories and justify your categorisations using defined criteria.",
+          "Classify examples of X and explain which features determined your decision.",
+          "Classify common errors in X and propose one prevention strategy per category."
+        ],
+        "analyse": [
+          "Classify cases of X using criteria Y and explain how the classification reveals patterns or relationships in the dataset.",
+          "Classify errors in X and analyse root causes within each category to propose targeted improvements."
+        ]
+      },
+      "levelGuidance": {
+        "understand": "Focus on explaining meaning/mechanisms or summarising with fidelity; avoid judgement unless criteria are provided.",
+        "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      }
+    },
+    {
+      "id": "apply-calculate",
+      "verb": "calculate",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "apply",
+      "alsoFitsLevelIds": [
+        "analyse"
+      ],
+      "meaning": {
+        "short": "Compute an answer using appropriate methods and show workings.",
+        "expanded": "Calculation is 'apply' when it involves selecting and executing a known method. Cognitive demand increases when learners must choose the method, interpret results, or check reasonableness."
+      },
+      "synonyms": [
+        "compute",
+        "derive",
+        "work out",
+        "estimate"
+      ],
+      "searchKeywords": [
+        "numbers",
+        "formula",
+        "working",
+        "solve"
+      ],
+      "learningOutcomeStems": [
+        "Calculate X for scenario Y using method Z and show all workings.",
+        "Calculate and interpret X, explaining what the result implies for decision Y.",
+        "Calculate X and check the reasonableness of your result using an alternative method or estimate."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Worked problem set with interpretation",
+          "description": "Solve a set of problems and include a short interpretation/decision note after each calculation.",
+          "evidenceProduced": [
+            "worked solutions",
+            "interpretation notes"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "short-answer",
+          "suitability": "high",
+          "rationale": "Constructed responses can require workings and method choice.",
+          "designNotes": [
+            "Award marks for method, workings, and interpretation separately."
+          ]
+        },
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "medium",
+          "rationale": "Auto-marking works for final answers but can miss method; use it when scale matters and build in method checks.",
+          "designNotes": [
+            "Use multi-step items, numerical tolerances, and randomised parameters.",
+            "Add at least some items requiring upload of workings."
+          ]
+        },
+        {
+          "assessmentFormatId": "report",
+          "suitability": "low",
+          "rationale": "Reports may include calculations, but are inefficient if the core outcome is computational skill.",
+          "designNotes": [
+            "If used, require an appendix of workings and interpretation."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "high",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "apply": [
+          "Calculate X for scenario Y using method Z and show all workings.",
+          "Calculate and interpret X, explaining what the result implies for decision Y.",
+          "Calculate X and check the reasonableness of your result using an alternative method or estimate."
+        ],
+        "analyse": [
+          "Calculate X and analyse sensitivity by varying key assumptions/inputs to explain how results change.",
+          "Calculate X for multiple cases and analyse the pattern in results to draw a conclusion about Y."
+        ]
+      },
+      "levelGuidance": {
+        "apply": "Focus on correct method/procedure in a new situation; include evidence of workings/performance.",
+        "analyse": "Require relationships, patterns, causes, or implications; not just listing."
+      }
+    },
+    {
+      "id": "analyse-differentiate",
+      "verb": "differentiate",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "analyse",
+      "alsoFitsLevelIds": [
+        "understand"
+      ],
+      "meaning": {
+        "short": "Distinguish between things by identifying meaningful differences.",
+        "expanded": "Differentiation becomes analysis when differences are tied to purpose, consequences, or underlying mechanisms—not just surface features."
+      },
+      "synonyms": [
+        "distinguish",
+        "tell apart",
+        "separate",
+        "discriminate"
+      ],
+      "searchKeywords": [
+        "difference",
+        "distinction",
+        "contrast",
+        "boundary"
+      ],
+      "learningOutcomeStems": [
+        "Differentiate between X and Y by explaining differences that matter for scenario Z.",
+        "Differentiate common misconceptions in X from correct reasoning, using examples.",
+        "Differentiate between approaches to X and explain how the choice affects outcomes."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Misconception spotting",
+          "description": "Given short learner responses, differentiate misconceptions from correct reasoning and explain what evidence led you to that conclusion.",
+          "evidenceProduced": [
+            "classified responses",
+            "explanations"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "case-study",
+          "suitability": "high",
+          "rationale": "Context-rich cases make differences consequential and easier to justify.",
+          "designNotes": [
+            "Ask learners to explain implications of each difference for a decision."
+          ]
+        },
+        {
+          "assessmentFormatId": "short-answer",
+          "suitability": "high",
+          "rationale": "Short prompts can require specifying the 'difference that matters' succinctly.",
+          "designNotes": [
+            "Require a rule-of-thumb or criterion for each distinction."
+          ]
+        },
+        {
+          "assessmentFormatId": "quiz",
+          "suitability": "low",
+          "rationale": "Typical MCQs often reduce differentiation to recognition without explanation.",
+          "designNotes": [
+            "If used, add 'choose + explain in one sentence'."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "analyse": [
+          "Differentiate between X and Y by explaining differences that matter for scenario Z.",
+          "Differentiate common misconceptions in X from correct reasoning, using examples.",
+          "Differentiate between approaches to X and explain how the choice affects outcomes."
+        ],
+        "understand": [
+          "Differentiate between X and Y by explaining differences that matter for scenario Z.",
+          "Differentiate common misconceptions in X from correct reasoning, using examples."
+        ]
+      },
+      "levelGuidance": {
+        "analyse": "Focus on relationships, patterns, criteria-based comparison, or root-cause reasoning; include significance/implications.",
+        "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      }
+    },
+    {
+      "id": "evaluate-recommend",
+      "verb": "recommend",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "evaluate",
+      "alsoFitsLevelIds": [
+        "create"
+      ],
+      "meaning": {
+        "short": "Propose a course of action based on criteria, evidence, and constraints.",
+        "expanded": "Recommendations require making a judgement and defending it. Strong evidence includes criteria, trade-offs, risk considerations, and alignment to stakeholder needs."
+      },
+      "synonyms": [
+        "advise",
+        "propose",
+        "suggest",
+        "endorse"
+      ],
+      "searchKeywords": [
+        "recommendation",
+        "decision",
+        "trade-offs",
+        "stakeholders"
+      ],
+      "learningOutcomeStems": [
+        "Recommend an approach to X for context Y, justifying your choice using criteria Z.",
+        "Recommend improvements to X based on evidence from data/user feedback, and prioritise them.",
+        "Recommend whether X should be adopted, including risks, mitigations, and success metrics."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Decision memo",
+          "description": "Write a decision memo to a stakeholder recommending an option, with a criteria table and risk/mitigation section.",
+          "evidenceProduced": [
+            "memo",
+            "criteria table",
+            "risk register snippet"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "report",
+          "suitability": "high",
+          "rationale": "Reports/memos naturally support recommendation structures and traceability to evidence.",
+          "designNotes": [
+            "Require explicit criteria and constraints.",
+            "Include 'what would change your mind' prompt."
+          ]
+        },
+        {
+          "assessmentFormatId": "presentation",
+          "suitability": "medium",
+          "rationale": "Presentations allow persuasion and can be stress-tested via questioning.",
+          "designNotes": [
+            "Include live Q&A and require a slide on trade-offs/risks."
+          ]
+        },
+        {
+          "assessmentFormatId": "oral-viva",
+          "suitability": "medium",
+          "rationale": "A viva can test whether recommendations are owned and defensible, not generated.",
+          "designNotes": [
+            "Ask learners to re-recommend under a changed constraint."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written",
+          "oral"
+        ],
+        "authenticity": "high",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "low",
+        "aiRisk": "low"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "evaluate": [
+          "Recommend an approach to X for context Y, justifying your choice using criteria Z.",
+          "Recommend improvements to X based on evidence from data/user feedback, and prioritise them.",
+          "Recommend whether X should be adopted, including risks, mitigations, and success metrics."
+        ],
+        "create": [
+          "Recommend a change plan for X and produce an implementation roadmap with milestones and success metrics.",
+          "Recommend improvements to X and create a prioritised backlog with justification and evaluation measures."
+        ]
+      },
+      "levelGuidance": {
+        "evaluate": "Focus on judgement using explicit criteria and evidence; include trade-offs, limitations, or counterarguments.",
+        "create": "Require an artefact under constraints with rationale/iteration."
+      }
+    },
+    {
+      "id": "create-compose",
+      "verb": "compose",
+      "taxonomyId": "bloom-revised",
+      "primaryLevelId": "create",
+      "alsoFitsLevelIds": [
+        "understand"
+      ],
+      "meaning": {
+        "short": "Create an original piece by assembling elements into a coherent product.",
+        "expanded": "Composition can be creative or technical (e.g., writing, media, code, music). Evidence improves with constraints, audience specification, and a rationale that explains choices."
+      },
+      "synonyms": [
+        "write",
+        "produce",
+        "create",
+        "author"
+      ],
+      "searchKeywords": [
+        "compose",
+        "draft",
+        "script",
+        "arrange"
+      ],
+      "learningOutcomeStems": [
+        "Compose X for audience Y that achieves purpose Z, explaining key choices.",
+        "Compose a short piece that demonstrates X technique and meets the given constraints.",
+        "Compose documentation/instructions that enable a novice to complete task X."
+      ],
+      "taskIdeas": [
+        {
+          "title": "Constrained composition",
+          "description": "Create a piece under explicit constraints (length, audience, required elements) and include a brief rationale for choices.",
+          "evidenceProduced": [
+            "composed artefact",
+            "rationale"
+          ]
+        }
+      ],
+      "formatMappings": [
+        {
+          "assessmentFormatId": "portfolio",
+          "suitability": "high",
+          "rationale": "Portfolios can capture composed artefacts plus reflective rationale and iteration.",
+          "designNotes": [
+            "Require annotations explaining choices and revisions."
+          ]
+        },
+        {
+          "assessmentFormatId": "project",
+          "suitability": "medium",
+          "rationale": "Projects can support composition as part of a larger deliverable with constraints and feedback.",
+          "designNotes": [
+            "Include stakeholder/audience constraints and review cycles."
+          ]
+        },
+        {
+          "assessmentFormatId": "presentation",
+          "suitability": "low",
+          "rationale": "Presentations can showcase composed work but may not fully evidence the composition process.",
+          "designNotes": [
+            "If used, pair with submission of the artefact and a rationale."
+          ]
+        }
+      ],
+      "tags": {
+        "delivery": [
+          "written",
+          "practical",
+          "oral"
+        ],
+        "authenticity": "medium",
+        "groupSuitable": true,
+        "scalableToLargeCohorts": "medium",
+        "aiRisk": "medium"
+      },
+      "diagnosticStrength": "low",
+      "stemsByLevel": {
+        "create": [
+          "Compose X for audience Y that achieves purpose Z, explaining key choices.",
+          "Compose a short piece that demonstrates X technique and meets the given constraints.",
+          "Compose documentation/instructions that enable a novice to complete task X."
+        ],
+        "understand": [
+          "Compose X for audience Y that achieves purpose Z, explaining key choices.",
+          "Compose a short piece that demonstrates X technique and meets the given constraints."
+        ]
+      },
+      "levelGuidance": {
+        "create": "Focus on producing an artefact under constraints; include rationale, iteration, and success criteria.",
+        "understand": "Ask for meaning, explanation, or faithful summary; avoid judgement unless criteria are given."
+      }
+    },
+    {
+      "id": "understand-describe",
+      "verb": "describe",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "understand",
+      "alsoFitsLevelIds": [
+        "remember"
+      ],
+      "meaning": "Give an account of key features, characteristics, or processes in a way that shows comprehension (may include context and examples).",
+      "synonyms": [
+        "outline",
+        "characterise",
+        "depict",
+        "portray",
+        "summarise (briefly)"
+      ],
+      "searchKeywords": [
+        "describe",
+        "description",
+        "outline",
+        "characterise",
+        "characterize",
+        "depict",
+        "portray",
+        "give an account"
+      ],
+      "learningOutcomeStems": [
+        "Describe the key features of {concept/process} using appropriate terminology.",
+        "Describe how {process/system} works, including its main stages/components.",
+        "Describe the differences between {A} and {B} in terms of {dimension}."
+      ],
+      "taskIdeas": [
+        "Write a short structured description of {concept} for a novice audience, using an example.",
+        "Create an annotated diagram that describes the parts of {system} and what each part does.",
+        "Record a 2–3 minute explanation that describes the steps of {procedure} and common errors."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "short-answer",
+          "suitability": "high",
+          "notes": "Works well when prompts require accurate, relevant features; can include context to demonstrate understanding.",
+          "taskExamples": "Answer 3 prompts describing {concept}, {example}, and {implication}.",
+          "tags": [
+            "individual",
+            "written",
+            "scalable",
+            "low-workload",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "quiz",
+          "suitability": "medium",
+          "notes": "Can check recall/understanding if questions are well-written; risk of drifting to recall-only without context.",
+          "taskExamples": "Short-answer quiz items: 'Describe X and give one example'.",
+          "tags": [
+            "individual",
+            "scalable",
+            "low-workload",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "poster",
+          "suitability": "medium",
+          "notes": "Suitable when description is supported by visuals/structure; depends on marking criteria.",
+          "taskExamples": "Poster describing a system with labelled parts and brief functional descriptions.",
+          "tags": [
+            "group-or-individual",
+            "practical",
+            "authenticity-medium",
+            "workload-medium"
+          ]
+        },
+        {
+          "formatId": "presentation",
+          "suitability": "medium",
+          "notes": "Oral description can show understanding; depends on prompts and time limits.",
+          "taskExamples": "Mini-presentation describing a process and its purpose for a given audience.",
+          "tags": [
+            "oral",
+            "individual-or-group",
+            "ai-risk-low"
+          ]
+        }
+      ],
+      "tags": [
+        "written",
+        "oral",
+        "foundational",
+        "clarity"
+      ],
+      "diagnosticStrength": "medium",
+      "stemsByLevel": {
+        "remember": [
+          "Describe (recall) the main parts/steps of {topic} from memory.",
+          "Describe key terms related to {topic} (definitions and labels)."
+        ],
+        "understand": [
+          "Describe {topic} and explain the role/significance of each key element.",
+          "Describe {topic} using an example that illustrates the concept in context."
+        ]
+      },
+      "levelGuidance": {
+        "remember": "Description is primarily listing features/steps without explanation of significance.",
+        "understand": "Description includes organisation, correct terminology, and context/examples showing comprehension."
+      }
+    },
+    {
+      "id": "apply-apply",
+      "verb": "apply",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "apply",
+      "alsoFitsLevelIds": [
+        "understand",
+        "analyse"
+      ],
+      "meaning": "Use knowledge, methods, or rules in a concrete situation to achieve a goal or solve a problem.",
+      "synonyms": [
+        "use",
+        "implement",
+        "execute",
+        "employ",
+        "carry out"
+      ],
+      "searchKeywords": [
+        "apply",
+        "use",
+        "implement",
+        "execute",
+        "employ",
+        "carry out",
+        "put into practice"
+      ],
+      "learningOutcomeStems": [
+        "Apply {method/framework} to {case/problem} to produce {output}.",
+        "Apply {rule/procedure} correctly to complete {task}.",
+        "Apply {concept} to interpret/solve {scenario}."
+      ],
+      "taskIdeas": [
+        "Apply a taught method to a new dataset and submit the resulting analysis with brief commentary.",
+        "Apply a policy/framework to a case study and produce a justified action plan.",
+        "Apply a procedure in a practical setting and document steps and outcomes."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "practical",
+          "suitability": "high",
+          "notes": "Directly captures procedural performance; depends on clarity of criteria and conditions.",
+          "taskExamples": "In-lab task: apply {procedure} to achieve {specified result}.",
+          "tags": [
+            "practical",
+            "individual",
+            "ai-risk-low",
+            "workload-medium"
+          ]
+        },
+        {
+          "formatId": "coding-task",
+          "suitability": "high",
+          "notes": "Applying algorithms/techniques is observable via artefacts and tests; depends on task authenticity.",
+          "taskExamples": "Implement {algorithm} and apply it to given inputs; pass unit tests.",
+          "tags": [
+            "individual",
+            "scalable-medium",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "case-study",
+          "suitability": "medium",
+          "notes": "Good when 'apply' is to a realistic scenario; depends on case complexity and marking criteria.",
+          "taskExamples": "Apply {framework} to a case and produce recommendations and rationale.",
+          "tags": [
+            "written",
+            "authenticity-high",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "simulation",
+          "suitability": "medium",
+          "notes": "Can show application in dynamic environments; depends on debrief/trace evidence.",
+          "taskExamples": "Run a simulation applying {rules} and explain decisions made at key points.",
+          "tags": [
+            "practical",
+            "authenticity-medium",
+            "ai-risk-low"
+          ]
+        }
+      ],
+      "tags": [
+        "procedural",
+        "transfer",
+        "skills"
+      ],
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "understand": [
+          "Apply {concept} to a simple, guided example and explain each step."
+        ],
+        "apply": [
+          "Apply {method} independently to a new problem to produce a correct solution/output."
+        ],
+        "analyse": [
+          "Apply {method} and then analyse the results to identify patterns, assumptions, or limitations."
+        ]
+      },
+      "levelGuidance": {
+        "understand": "Application is guided/scaffolded and focuses on explaining steps rather than independent transfer.",
+        "apply": "Independent use in a new situation; correctness and appropriateness of method are central.",
+        "analyse": "Application is followed by analytic interpretation (patterns/assumptions/relationships)."
+      }
+    },
+    {
+      "id": "apply-perform",
+      "verb": "perform",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "apply",
+      "alsoFitsLevelIds": [
+        "remember",
+        "understand",
+        "evaluate"
+      ],
+      "meaning": "Carry out a procedure or skill to an expected standard under defined conditions.",
+      "synonyms": [
+        "carry out",
+        "execute",
+        "demonstrate",
+        "deliver",
+        "operate"
+      ],
+      "searchKeywords": [
+        "perform",
+        "carry out",
+        "execute",
+        "operate",
+        "demonstrate",
+        "deliver"
+      ],
+      "learningOutcomeStems": [
+        "Perform {procedure/skill} safely and accurately in {context}.",
+        "Perform {task} to meet {standard/criteria}.",
+        "Perform {role/process} in a simulated or authentic setting."
+      ],
+      "taskIdeas": [
+        "Observed skill check: perform {skill} with a checklist and brief reflection on errors.",
+        "OSCE-style station: perform {task} within time limit and explain decision points.",
+        "Live demo: perform a workflow and troubleshoot when given a constraint."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "demo",
+          "suitability": "high",
+          "notes": "Direct observation supports validity for performance; depends on rubric/checklist quality.",
+          "taskExamples": "Demo performing {workflow} while narrating key choices.",
+          "tags": [
+            "practical",
+            "oral",
+            "ai-risk-low",
+            "workload-medium"
+          ]
+        },
+        {
+          "formatId": "practical",
+          "suitability": "high",
+          "notes": "Best match for hands-on skills and procedures; depends on conditions and resources.",
+          "taskExamples": "Perform {lab technique} and record outputs in a log.",
+          "tags": [
+            "practical",
+            "authenticity-high",
+            "ai-risk-low"
+          ]
+        },
+        {
+          "formatId": "oral-viva",
+          "suitability": "medium",
+          "notes": "Can probe reasoning behind performance; depends on pairing with artefact/observation.",
+          "taskExamples": "Viva after performance: explain why you did X at step Y.",
+          "tags": [
+            "oral",
+            "ai-risk-low",
+            "workload-high"
+          ]
+        },
+        {
+          "formatId": "portfolio",
+          "suitability": "medium",
+          "notes": "Portfolio can evidence repeated performance over time; depends on verification/authenticity.",
+          "taskExamples": "Portfolio of performance logs + supervisor sign-off.",
+          "tags": [
+            "authenticity-high",
+            "workload-high",
+            "ai-risk-low"
+          ]
+        }
+      ],
+      "tags": [
+        "skills",
+        "procedural",
+        "observed"
+      ],
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "remember": [
+          "Perform a rehearsed procedure exactly as taught (routine conditions)."
+        ],
+        "apply": [
+          "Perform {skill} in a new or variable context, adapting within constraints."
+        ],
+        "evaluate": [
+          "Perform {skill} and evaluate your performance against criteria, proposing improvements."
+        ]
+      },
+      "levelGuidance": {
+        "remember": "Reproduction of a routine with minimal adaptation.",
+        "apply": "Competent execution in context, including appropriate adjustments.",
+        "evaluate": "Includes judgement about quality (self/peer) using explicit criteria."
+      }
+    },
+    {
+      "id": "analyse-analyse",
+      "verb": "analyse",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "analyse",
+      "alsoFitsLevelIds": [
+        "understand",
+        "evaluate"
+      ],
+      "meaning": "Break information into parts to examine relationships, patterns, assumptions, or causes and effects.",
+      "synonyms": [
+        "analyze",
+        "examine",
+        "deconstruct",
+        "break down",
+        "interpret (analytically)"
+      ],
+      "searchKeywords": [
+        "analyse",
+        "analyze",
+        "analysis",
+        "break down",
+        "deconstruct",
+        "examine",
+        "pattern",
+        "relationship",
+        "assumption"
+      ],
+      "learningOutcomeStems": [
+        "Analyse {data/text/case} to identify {patterns/relationships} and explain their significance.",
+        "Analyse {problem} by separating it into components and evaluating how they interact.",
+        "Analyse {argument} to identify assumptions, evidence, and reasoning."
+      ],
+      "taskIdeas": [
+        "Analyse a dataset and produce a short insights memo explaining key patterns and implications.",
+        "Analyse a case study and map causes, stakeholders, and constraints before proposing options.",
+        "Analyse an argument by annotating claims/evidence and identifying missing evidence."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "report",
+          "suitability": "high",
+          "notes": "Reports support structured analysis with evidence; depends on criteria (relationships/implications).",
+          "taskExamples": "Analysis report: identify patterns in data and justify interpretations.",
+          "tags": [
+            "written",
+            "ai-risk-medium",
+            "workload-medium"
+          ]
+        },
+        {
+          "formatId": "lab-report",
+          "suitability": "medium",
+          "notes": "Often includes analysis of results; depends on requiring interpretation not just computation.",
+          "taskExamples": "Lab report section: analyse results and discuss sources of error/meaning.",
+          "tags": [
+            "written",
+            "practical",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "case-study",
+          "suitability": "high",
+          "notes": "Cases can elicit analysis of relationships/causes; depends on complexity and prompts.",
+          "taskExamples": "Analyse case using framework; identify drivers and trade-offs.",
+          "tags": [
+            "authenticity-high",
+            "written",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "oral-viva",
+          "suitability": "medium",
+          "notes": "Good for probing analytic reasoning; depends on having an artefact to discuss.",
+          "taskExamples": "Viva: walk through your analysis choices and what they imply.",
+          "tags": [
+            "oral",
+            "ai-risk-low",
+            "workload-high"
+          ]
+        }
+      ],
+      "tags": [
+        "evidence",
+        "reasoning",
+        "patterns"
+      ],
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "understand": [
+          "Analyse (guided) a simple example to show how parts relate (with prompts/scaffolds)."
+        ],
+        "analyse": [
+          "Analyse {material} independently to identify relationships/patterns and explain significance."
+        ],
+        "evaluate": [
+          "Analyse {options/evidence} and evaluate which interpretation/option is best using criteria."
+        ]
+      },
+      "levelGuidance": {
+        "understand": "Heavily scaffolded analysis focused on explaining relationships in a simple example.",
+        "analyse": "Independent decomposition + relationship/pattern identification + significance.",
+        "evaluate": "Analysis is used to support a judgement with explicit criteria."
+      }
+    },
+    {
+      "id": "analyse-investigate",
+      "verb": "investigate",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "analyse",
+      "alsoFitsLevelIds": [
+        "apply",
+        "evaluate",
+        "create"
+      ],
+      "meaning": "Systematically inquire into a question/problem by gathering evidence, analysing it, and drawing defensible conclusions.",
+      "synonyms": [
+        "inquire",
+        "explore",
+        "research",
+        "probe",
+        "examine"
+      ],
+      "searchKeywords": [
+        "investigate",
+        "inquire",
+        "investigation",
+        "explore",
+        "research",
+        "probe",
+        "evidence",
+        "method"
+      ],
+      "learningOutcomeStems": [
+        "Investigate {question/problem} using {method} and present evidence-based findings.",
+        "Investigate the causes/factors influencing {phenomenon} and explain your conclusions.",
+        "Investigate {system/process} to identify issues and propose evidence-based improvements."
+      ],
+      "taskIdeas": [
+        "Mini research task: investigate a question, justify method, analyse evidence, and report findings.",
+        "Diagnostic investigation: investigate a failure, collect logs/evidence, identify root causes.",
+        "Workplace-style investigation: investigate stakeholder needs and produce a brief with findings."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "project",
+          "suitability": "high",
+          "notes": "Projects accommodate inquiry cycles (question→method→evidence→findings); depends on scope control.",
+          "taskExamples": "Project: investigate X, collect data, analyse, present findings and limitations.",
+          "tags": [
+            "authenticity-high",
+            "workload-high",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "report",
+          "suitability": "high",
+          "notes": "Reports suit method + evidence + conclusions; depends on requiring traceability.",
+          "taskExamples": "Investigation report with method, evidence table, and justified conclusions.",
+          "tags": [
+            "written",
+            "workload-medium",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "portfolio",
+          "suitability": "medium",
+          "notes": "Supports iterative investigation artefacts over time; depends on verification and curation criteria.",
+          "taskExamples": "Portfolio: research log, evidence summaries, reflections, final conclusions.",
+          "tags": [
+            "workload-high",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "presentation",
+          "suitability": "medium",
+          "notes": "Can communicate findings; depends on requiring evidence and Q&A.",
+          "taskExamples": "Present investigation findings and defend choices in Q&A.",
+          "tags": [
+            "oral",
+            "group-or-individual",
+            "ai-risk-low"
+          ]
+        }
+      ],
+      "tags": [
+        "inquiry",
+        "evidence",
+        "method"
+      ],
+      "diagnosticStrength": "medium",
+      "stemsByLevel": {
+        "apply": [
+          "Investigate using a prescribed method/tool to gather evidence and report results."
+        ],
+        "analyse": [
+          "Investigate by selecting appropriate evidence sources and analysing relationships/causes."
+        ],
+        "evaluate": [
+          "Investigate and evaluate the strength/limitations of evidence and methods used."
+        ],
+        "create": [
+          "Investigate and produce a novel artefact/solution informed by findings and constraints."
+        ]
+      },
+      "levelGuidance": {
+        "apply": "Uses a given method; focus is correct execution of investigative steps.",
+        "analyse": "Emphasis on interpreting evidence and explaining relationships/causes.",
+        "evaluate": "Emphasis on judging evidence quality, method fit, and uncertainty/limits.",
+        "create": "Findings inform the design/production of an original output."
+      }
+    },
+    {
+      "id": "evaluate-evaluate",
+      "verb": "evaluate",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "evaluate",
+      "alsoFitsLevelIds": [
+        "analyse",
+        "create"
+      ],
+      "meaning": "Make a judgement about quality, value, or effectiveness using explicit criteria and evidence.",
+      "synonyms": [
+        "assess",
+        "appraise",
+        "judge",
+        "rate",
+        "critique (lightly)"
+      ],
+      "searchKeywords": [
+        "evaluate",
+        "assessment",
+        "assess",
+        "appraise",
+        "judge",
+        "rate",
+        "criteria",
+        "rubric",
+        "evidence"
+      ],
+      "learningOutcomeStems": [
+        "Evaluate {option/solution} against {criteria} and justify your judgement using evidence.",
+        "Evaluate the effectiveness of {approach/intervention} using {data/standards}.",
+        "Evaluate {work/product} and propose improvements based on criteria."
+      ],
+      "taskIdeas": [
+        "Evaluate two approaches using a weighted criteria matrix and justify the recommendation.",
+        "Evaluate an artefact against a rubric and produce a feedback report with priorities.",
+        "Evaluate an intervention using evidence and discuss limitations/uncertainty."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "peer-review",
+          "suitability": "high",
+          "notes": "Peer review naturally aligns with criteria-based judgement; depends on rubric quality and training.",
+          "taskExamples": "Peer-review using rubric + justification + improvement suggestions.",
+          "tags": [
+            "group",
+            "written",
+            "ai-risk-low",
+            "workload-medium"
+          ]
+        },
+        {
+          "formatId": "essay",
+          "suitability": "medium",
+          "notes": "Works when criteria and evidence are explicit; risk of opinion-only without structure.",
+          "taskExamples": "Essay: evaluate theory X using criteria Y and evidence Z.",
+          "tags": [
+            "written",
+            "ai-risk-medium",
+            "workload-high"
+          ]
+        },
+        {
+          "formatId": "oral-viva",
+          "suitability": "medium",
+          "notes": "Allows probing criteria and evidence; depends on artefacts and questioning.",
+          "taskExamples": "Viva: defend your evaluation and respond to counter-arguments.",
+          "tags": [
+            "oral",
+            "ai-risk-low",
+            "workload-high"
+          ]
+        },
+        {
+          "formatId": "report",
+          "suitability": "high",
+          "notes": "Reports suit structured evaluation (criteria, evidence, judgement); depends on requiring traceability.",
+          "taskExamples": "Evaluation report including criteria, evidence, judgement, and recommendations.",
+          "tags": [
+            "written",
+            "ai-risk-medium",
+            "workload-medium"
+          ]
+        }
+      ],
+      "tags": [
+        "judgement",
+        "criteria",
+        "evidence"
+      ],
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "analyse": [
+          "Evaluate (preparatory) by analysing evidence and identifying relevant criteria (no final judgement required yet)."
+        ],
+        "evaluate": [
+          "Evaluate {thing} by applying explicit criteria and evidence to reach a justified judgement."
+        ],
+        "create": [
+          "Evaluate and refine {artefact} iteratively, documenting decisions and improvements."
+        ]
+      },
+      "levelGuidance": {
+        "analyse": "Focus on setting up criteria/evidence and understanding trade-offs; judgement may be tentative.",
+        "evaluate": "Explicit criteria + evidence → defended judgement.",
+        "create": "Evaluation is used to iterate and improve an original artefact."
+      }
+    },
+    {
+      "id": "create-produce",
+      "verb": "produce",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "create",
+      "alsoFitsLevelIds": [
+        "apply",
+        "understand"
+      ],
+      "meaning": "Generate an artefact/output that meets stated requirements; may range from templated outputs to original work depending on constraints.",
+      "synonyms": [
+        "create",
+        "generate",
+        "make",
+        "construct",
+        "develop",
+        "compose"
+      ],
+      "searchKeywords": [
+        "produce",
+        "create",
+        "generate",
+        "make",
+        "construct",
+        "develop",
+        "compose",
+        "output",
+        "artefact"
+      ],
+      "learningOutcomeStems": [
+        "Produce {artefact} that meets {requirements/constraints} for {audience/purpose}.",
+        "Produce a {deliverable} integrating {elements} and justifying key design choices.",
+        "Produce {output} and document the process and decisions used."
+      ],
+      "taskIdeas": [
+        "Produce a short policy brief for a defined audience with constraints on length and evidence.",
+        "Produce a working prototype (code/design) that meets acceptance criteria.",
+        "Produce a portfolio artefact and a short rationale explaining choices made."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "project",
+          "suitability": "high",
+          "notes": "Projects support creation of substantive outputs; depends on originality and constraints.",
+          "taskExamples": "Produce a prototype meeting acceptance criteria + short rationale.",
+          "tags": [
+            "authenticity-high",
+            "workload-high",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "portfolio",
+          "suitability": "high",
+          "notes": "Portfolios evidence production over time; depends on curation and authenticity checks.",
+          "taskExamples": "Produce multiple artefacts across weeks with reflection and evidence of process.",
+          "tags": [
+            "workload-high",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "design-brief",
+          "suitability": "medium",
+          "notes": "Briefs can structure production with constraints; depends on evaluating against requirements.",
+          "taskExamples": "Produce a brief + artefact responding to client constraints.",
+          "tags": [
+            "authenticity-high",
+            "written",
+            "workload-medium"
+          ]
+        },
+        {
+          "formatId": "practical",
+          "suitability": "medium",
+          "notes": "Suitable where artefact is produced hands-on; depends on resources and criteria.",
+          "taskExamples": "Produce {artefact} in a studio/lab session with rubric.",
+          "tags": [
+            "practical",
+            "ai-risk-low"
+          ]
+        }
+      ],
+      "tags": [
+        "output",
+        "constraints",
+        "artefact"
+      ],
+      "diagnosticStrength": "medium",
+      "stemsByLevel": {
+        "understand": [
+          "Produce a simple representation of {concept} (e.g., diagram/summary) to demonstrate understanding."
+        ],
+        "apply": [
+          "Produce {standard output} by correctly applying a prescribed method/template."
+        ],
+        "create": [
+          "Produce an original artefact that integrates elements and meets constraints for a purpose/audience."
+        ]
+      },
+      "levelGuidance": {
+        "understand": "Output is primarily representational (shows comprehension).",
+        "apply": "Output follows a prescribed method/template; success is correctness/completeness.",
+        "create": "Output requires design decisions, integration, and originality within constraints."
+      }
+    },
+    {
+      "id": "create-create",
+      "verb": "create",
+      "taxonomyId": "bloom",
+      "primaryLevelId": "create",
+      "alsoFitsLevelIds": [
+        "apply",
+        "evaluate"
+      ],
+      "meaning": "Bring elements together to form a new whole; generate an original product/plan/solution under constraints.",
+      "synonyms": [
+        "design",
+        "develop",
+        "devise",
+        "construct",
+        "invent",
+        "formulate"
+      ],
+      "searchKeywords": [
+        "create",
+        "design",
+        "develop",
+        "devise",
+        "construct",
+        "invent",
+        "formulate",
+        "original",
+        "constraints"
+      ],
+      "learningOutcomeStems": [
+        "Create {artefact/solution} that addresses {need/problem} within {constraints}.",
+        "Create and justify a plan/strategy for {goal} based on {evidence/requirements}.",
+        "Create a novel approach to {problem} and evaluate its effectiveness against criteria."
+      ],
+      "taskIdeas": [
+        "Create a design proposal for a client with constraints, including rationale and trade-offs.",
+        "Create a working solution and iterate based on testing/feedback.",
+        "Create an intervention plan, justify decisions, and outline evaluation measures."
+      ],
+      "formatMappings": [
+        {
+          "formatId": "project",
+          "suitability": "high",
+          "notes": "Projects allow original creation with constraints and iteration; depends on rubric emphasising decisions and evidence.",
+          "taskExamples": "Create a solution/prototype; document iterations and decisions.",
+          "tags": [
+            "authenticity-high",
+            "workload-high",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "design-brief",
+          "suitability": "high",
+          "notes": "Briefs capture constraints, audience, and rationale; depends on assessment criteria.",
+          "taskExamples": "Create a brief + artefact; justify design choices.",
+          "tags": [
+            "written",
+            "authenticity-high",
+            "workload-medium"
+          ]
+        },
+        {
+          "formatId": "portfolio",
+          "suitability": "medium",
+          "notes": "Portfolios support iterative creation evidence; depends on authentic process evidence.",
+          "taskExamples": "Portfolio of drafts, feedback, and final artefact.",
+          "tags": [
+            "workload-high",
+            "ai-risk-medium"
+          ]
+        },
+        {
+          "formatId": "presentation",
+          "suitability": "medium",
+          "notes": "Presenting a created solution can evidence reasoning; depends on Q&A and artefact quality.",
+          "taskExamples": "Pitch your created solution and defend trade-offs in Q&A.",
+          "tags": [
+            "oral",
+            "group-or-individual",
+            "ai-risk-low"
+          ]
+        }
+      ],
+      "tags": [
+        "originality",
+        "integration",
+        "constraints"
+      ],
+      "diagnosticStrength": "high",
+      "stemsByLevel": {
+        "apply": [
+          "Create (guided) a product using a provided template/process, adapting to minor constraints."
+        ],
+        "evaluate": [
+          "Create and then evaluate/refine the artefact against explicit criteria, documenting improvements."
+        ],
+        "create": [
+          "Create an original artefact/solution integrating elements and meeting constraints for a defined purpose."
+        ]
+      },
+      "levelGuidance": {
+        "apply": "Creation is largely templated; main demand is correct application and minor adaptation.",
+        "evaluate": "Creation includes explicit judgement/refinement cycles based on criteria and evidence.",
+        "create": "Emphasis on originality, integration, constraints, and defensible design decisions."
+      }
+    }
+  ],
+  "uiHints": {
+    "defaultMode": "choice",
+    "bloomHierarchyAlwaysVisible": true,
+    "suggestedFilters": [
+      "assessmentFormat",
+      "bloomLevel",
+      "keyword",
+      "synonym",
+      "tag",
+      "aiRisk",
+      "delivery",
+      "primaryLevel",
+      "alsoFitsLevels",
+      "diagnosticStrength"
+    ]
+  },
+  "validationRules": {
+    "requiredTopLevelKeys": [
+      "meta",
+      "taxonomies",
+      "assessmentFormats",
+      "verbs"
+    ],
+    "uniqueIds": {
+      "bloomLevelIds": true,
+      "assessmentFormatIds": true,
+      "verbIds": true
+    },
+    "referencesMustResolve": [
+      "verbs[].taxonomyId -> taxonomies.bloom.id",
+      "verbs[].primaryLevelId -> taxonomies.bloom.levels[].id",
+      "verbs[].formatMappings[].assessmentFormatId -> assessmentFormats[].id"
+    ],
+    "allowedSuitabilityValues": [
+      "high",
+      "medium",
+      "low",
+      "context-dependent"
+    ],
+    "minExamples": {
+      "learningOutcomeStemsPerVerb": 3,
+      "formatMappingsPerVerb": 3,
+      "taskIdeasPerVerb": 1
+    },
+    "recommendations": {
+      "preferStableIds": true,
+      "avoidVerbDuplication": "If you add a near-synonym verb, link via synonyms/relatedVerbs instead of copying full entries.",
+      "keepMappingsIndicative": "Always include a rationale + at least one design note; avoid absolute language.",
+      "multiLevelVerbs": "A verb may fit multiple Bloom levels depending on the object and constraints. Use stemsByLevel to disambiguate the intended cognitive demand."
+    },
+    "optionalVerbKeys": [
+      "stemsByLevel",
+      "levelGuidance",
+      "diagnosticStrength"
+    ],
+    "allowedDiagnosticStrengthValues": [
+      "high",
+      "medium",
+      "low"
+    ]
+  }
+}

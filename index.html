@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Constructive Alignment Tool</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid py-5">
+    <div class="row g-0">
+      <div class="col-12 text-center">
+        <h1 class="mb-2">Constructive Alignment Support</h1>
+        <p class="text-muted mb-4">
+          Quick prompts to support constructive alignment (Bloom verb ↔ assessment design). 
+          <span id="disclaimerText"></span>
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row g-4">
+      <!-- Bloom hierarchy: always visible -->
+      <div class="col-12 col-lg-4">
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span class="fw-semibold">Bloom hierarchy</span>
+            <button id="collapseAll" class="btn btn-sm btn-outline-secondary" type="button">Collapse all</button>
+          </div>
+          <div class="card-body p-2">
+            <div class="accordion" id="bloomAccordion">
+              <!-- bloom accordion injected here -->
+            </div>
+          </div>
+          <div class="card-footer text-muted small">
+            Click any verb to view examples and commonly suitable formats.
+          </div>
+        </div>
+      </div>
+
+      <!-- Main panel -->
+      <div class="col-12 col-lg-8">
+
+        <!-- START CHOICE -->
+        <div id="startChoice" class="row justify-content-center g-3">
+          <div class="col-12 col-md-6">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">I’m writing Learning Outcomes</h5>
+                <p class="card-text text-muted">
+                  Start from a verb and get typical cognitive levels, task ideas, and commonly suitable assessment formats.
+                </p>
+                <button id="startLO" class="btn btn-primary w-100">Start from a verb</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card h-100 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">I’m designing an assessment</h5>
+                <p class="card-text text-muted">
+                  Start from an assessment format and see verbs you can credibly assess, grouped by Bloom level.
+                </p>
+                <button id="startAssessment" class="btn btn-outline-primary w-100">Start from an assessment</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LO FLOW -->
+        <div id="loFlow" class="row mt-4 d-none">
+          <div class="col-12">
+            <div class="d-flex gap-2 justify-content-center mb-3">
+              <button id="backFromLO" class="btn btn-link">← Back</button>
+            </div>
+
+            <div class="input-group input-group-lg mb-3">
+              <input type="text" class="form-control" id="verbSearch" placeholder="Type a verb (e.g., analyse, evaluate)..." />
+              <button class="btn btn-primary" id="verbSearchBtn">Search</button>
+            </div>
+            <div class="text-center text-muted small mb-3">
+              Tip: type a few letters and choose from the dropdown, or click a verb on the left.
+            </div>
+          </div>
+        </div>
+
+        <!-- ASSESSMENT FLOW -->
+        <div id="assessmentFlow" class="row mt-4 d-none">
+          <div class="col-12">
+            <div class="d-flex gap-2 justify-content-center mb-3">
+              <button id="backFromAssessment" class="btn btn-link">← Back</button>
+            </div>
+
+            <label for="assessmentSelect" class="form-label fw-semibold">Assessment format</label>
+            <select id="assessmentSelect" class="form-select form-select-lg">
+              <option value="">Choose an assessment format…</option>
+            </select>
+
+            <div class="text-muted small mt-2">
+              Choose a format to see verbs grouped by Bloom level. Click any verb for details.
+            </div>
+          </div>
+        </div>
+		<!-- NFQ Guidance (standalone - does not affect Bloom/verbs logic) -->
+<div class="card mb-3" id="nfqGuidanceCard">
+  <div class="card-header d-flex align-items-center justify-content-between">
+    <span><strong>NFQ guidance</strong> <span class="text-muted">(tips for the level you’re working at)</span></span>
+  </div>
+
+  <div class="card-body">
+    <div class="row g-2 align-items-end">
+      <div class="col-12 col-md-4">
+        <label for="nfqSelect" class="form-label">Select NFQ level</label>
+        <select id="nfqSelect" class="form-select">
+          <option value="">-- choose --</option>
+          <option value="6">NFQ 6</option>
+          <option value="7">NFQ 7</option>
+          <option value="8">NFQ 8</option>
+          <option value="9">NFQ 9</option>
+        </select>
+      </div>
+
+      <div class="col-12 col-md-8">
+        <div id="nfqQuickNudge" class="text-muted small">
+          Pick a level to see guidance on appropriate cognitive demand, LO phrasing, and assessment design.
+        </div>
+      </div>
+    </div>
+
+    <hr class="my-3" />
+
+    <div id="nfqTipsArea">
+      <div class="text-muted">No level selected yet.</div>
+    </div>
+  </div>
+</div>
+
+        <!-- RESULTS -->
+        <div class="row mt-4">
+          <div class="col-12" id="resultsArea">
+            <!-- results injected here -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
