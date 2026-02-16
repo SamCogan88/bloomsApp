@@ -164,7 +164,8 @@
 
 <body>
   <div class="container-fluid py-5">
-    <div class="row g-0 mb-4">
+    <!-- Header -->
+    <div class="row g-0 mb-5">
       <div class="col-12 d-flex justify-content-between align-items-center">
         <div class="text-center flex-grow-1">
           <h1 class="mb-2">Constructive Alignment Support</h1>
@@ -179,101 +180,82 @@
       </div>
     </div>
 
-    <!-- NFQ Guidance (standalone - does not affect Bloom/verbs logic) -->
-    <div class="row g-4 mb-4">
-      <div class="col-12">
-        <div class="card" id="nfqGuidanceCard">
-          <div class="card-header d-flex align-items-center justify-content-between">
-            <span><strong>NFQ guidance</strong> <span class="text-muted">(tips for the level you're working at)</span></span>
-          </div>
-
+    <!-- START CHOICE (Wizard Step 1) -->
+    <div id="startChoice" class="row justify-content-center g-3 mb-5">
+      <div class="col-12 col-md-6">
+        <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <div class="row g-2 align-items-end">
-              <div class="col-12 col-md-4">
-                <label for="nfqSelect" class="form-label">Select NFQ level</label>
-                <select id="nfqSelect" class="form-select">
-                  <option value="">-- choose --</option>
-                  <option value="6">NFQ 6</option>
-                  <option value="7">NFQ 7</option>
-                  <option value="8">NFQ 8</option>
-                  <option value="9">NFQ 9</option>
-                </select>
-              </div>
-
-              <div class="col-12 col-md-8">
-                <div id="nfqQuickNudge" class="text-muted small">
-                  Pick a level to see guidance on appropriate cognitive demand, LO phrasing, and assessment design.
-                </div>
-              </div>
-            </div>
-
-            <hr class="my-3" />
-
-            <div id="nfqTipsArea">
-              <div class="text-muted">No level selected yet.</div>
-            </div>
+            <h5 class="card-title">I'm writing Learning Outcomes</h5>
+            <p class="card-text text-muted">
+              Start from a verb and get typical cognitive levels, task ideas, and commonly suitable assessment formats.
+            </p>
+            <button id="startLO" class="btn btn-primary w-100">Start from a verb</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">I'm designing an assessment</h5>
+            <p class="card-text text-muted">
+              Start from an assessment format and see verbs you can credibly assess, grouped by Bloom level.
+            </p>
+            <button id="startAssessment" class="btn btn-outline-primary w-100">Start from an assessment</button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Bloom hierarchy: full width -->
-    <div class="row g-4 mb-4">
-      <div class="col-12">
-        <div class="card shadow-sm">
-          <div class="card-header d-flex justify-content-between align-items-center">
-            <span class="fw-semibold">Bloom hierarchy</span>
-            <button id="collapseAll" class="btn btn-sm btn-outline-secondary" type="button">Collapse all</button>
-          </div>
-          <div class="card-body p-2">
-            <div class="accordion" id="bloomAccordion">
-              <!-- bloom accordion injected here -->
+    <!-- Main workflow (hidden until mode is selected) -->
+    <div id="workflowArea" class="d-none">
+      <!-- NFQ + Bloom Hierarchy in sidebar (40%) -->
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-lg-5 order-lg-2">
+          <!-- NFQ Guidance -->
+          <div class="card shadow-sm mb-4" id="nfqGuidanceCard">
+            <div class="card-header">
+              <label for="nfqSelect" class="form-label mb-0">NFQ Level (contextual tips)</label>
+            </div>
+            <div class="card-body">
+              <select id="nfqSelect" class="form-select form-select-sm mb-3">
+                <option value="">-- choose --</option>
+                <option value="6">NFQ 6</option>
+                <option value="7">NFQ 7</option>
+                <option value="8">NFQ 8</option>
+                <option value="9">NFQ 9</option>
+              </select>
+              <div id="nfqTipsArea" class="small">
+                <div class="text-muted">Select a level to see guidance.</div>
+              </div>
             </div>
           </div>
-          <div class="card-footer text-muted small">
-            Click any verb to view examples and commonly suitable formats.
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Main content area with 60/40 split -->
-    <div class="row g-4">
-      <!-- Left side: Results area (60%) -->
-      <div class="col-12 col-lg-7">
-        <!-- START CHOICE -->
-        <div id="startChoice" class="row justify-content-center g-3">
-          <div class="col-12 col-md-6">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">I'm writing Learning Outcomes</h5>
-                <p class="card-text text-muted">
-                  Start from a verb and get typical cognitive levels, task ideas, and commonly suitable assessment formats.
-                </p>
-                <button id="startLO" class="btn btn-primary w-100">Start from a verb</button>
+          <!-- Bloom Hierarchy -->
+          <div class="card shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <span class="fw-semibold">Bloom hierarchy</span>
+              <button id="collapseAll" class="btn btn-sm btn-outline-secondary" type="button">Collapse</button>
+            </div>
+            <div class="card-body p-2">
+              <div class="accordion" id="bloomAccordion">
+                <!-- bloom accordion injected here -->
               </div>
             </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="card h-100 shadow-sm">
-              <div class="card-body">
-                <h5 class="card-title">I'm designing an assessment</h5>
-                <p class="card-text text-muted">
-                  Start from an assessment format and see verbs you can credibly assess, grouped by Bloom level.
-                </p>
-                <button id="startAssessment" class="btn btn-outline-primary w-100">Start from an assessment</button>
-              </div>
+            <div class="card-footer text-muted small">
+              Click any verb for details.
             </div>
           </div>
         </div>
 
-        <!-- LO FLOW -->
-        <div id="loFlow" class="row mt-4 d-none">
-          <div class="col-12">
-            <div class="d-flex gap-2 justify-content-center mb-3">
-              <button id="backFromLO" class="btn btn-link">← Back</button>
-            </div>
+        <!-- Main content area (60%) -->
+        <div class="col-12 col-lg-7 order-lg-1">
+          <!-- Back button -->
+          <div class="d-flex gap-2 mb-3">
+            <button id="backBtn" class="btn btn-link">← Back to start</button>
+          </div>
 
+          <!-- LO FLOW -->
+          <div id="loFlow" class="d-none">
             <div class="input-group input-group-lg mb-3">
               <input type="text" class="form-control" id="verbSearch" placeholder="Type a verb (e.g., analyse, evaluate)..." />
               <button class="btn btn-primary" id="verbSearchBtn">Search</button>
@@ -282,37 +264,23 @@
               Tip: type a few letters and choose from the dropdown, or click a verb on the left.
             </div>
           </div>
-        </div>
 
-        <!-- ASSESSMENT FLOW -->
-        <div id="assessmentFlow" class="row mt-4 d-none">
-          <div class="col-12">
-            <div class="d-flex gap-2 justify-content-center mb-3">
-              <button id="backFromAssessment" class="btn btn-link">← Back</button>
-            </div>
-
+          <!-- ASSESSMENT FLOW -->
+          <div id="assessmentFlow" class="d-none">
             <label for="assessmentSelect" class="form-label fw-semibold">Assessment format</label>
-            <select id="assessmentSelect" class="form-select form-select-lg">
+            <select id="assessmentSelect" class="form-select form-select-lg mb-3">
               <option value="">Choose an assessment format…</option>
             </select>
-
-            <div class="text-muted small mt-2">
+            <div class="text-muted small">
               Choose a format to see verbs grouped by Bloom level. Click any verb for details.
             </div>
           </div>
-        </div>
 
-        <!-- RESULTS -->
-        <div class="row mt-4">
-          <div class="col-12" id="resultsArea">
+          <!-- RESULTS -->
+          <div id="resultsArea" class="mt-4">
             <!-- results injected here -->
           </div>
         </div>
-      </div>
-
-      <!-- Right side: Sidebar info (40%) -->
-      <div class="col-12 col-lg-5">
-        <!-- Additional sidebar content can go here if needed -->
       </div>
     </div>
   </div>

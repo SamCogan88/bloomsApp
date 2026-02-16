@@ -206,21 +206,36 @@ function renderLevelPills(levelNames) {
 // -------------------- Mode control --------------------
 function setMode(mode) {
   // mode: "start" | "lo" | "assessment"
-  $("#startChoice").toggleClass("d-none", mode !== "start");
-  $("#loFlow").toggleClass("d-none", mode !== "lo");
-  $("#assessmentFlow").toggleClass("d-none", mode !== "assessment");
+  const startChoice = $("#startChoice");
+  const workflowArea = $("#workflowArea");
+  const loFlow = $("#loFlow");
+  const assessmentFlow = $("#assessmentFlow");
+  const backBtn = $("#backBtn");
 
-  clearResults();
+  if (mode === "start") {
+    startChoice.removeClass("d-none");
+    workflowArea.addClass("d-none");
+    clearResults();
+  } else {
+    startChoice.addClass("d-none");
+    workflowArea.removeClass("d-none");
+    loFlow.addClass("d-none");
+    assessmentFlow.addClass("d-none");
 
-  if (mode === "lo") {
-    $("#verbSearch").focus();
-    showInfo(
-      "Type/select a verb (or click one on the left) to see meaning, Bloom level(s), LO stems, task ideas, and commonly suitable assessment formats."
-    );
-  }
+    if (mode === "lo") {
+      loFlow.removeClass("d-none");
+      $("#verbSearch").focus();
+      showInfo(
+        "Type/select a verb (or click one on the left) to see meaning, Bloom level(s), LO stems, task ideas, and commonly suitable assessment formats."
+      );
+    }
 
-  if (mode === "assessment") {
-    showInfo("Choose an assessment format to see verb entries grouped by Bloom level. Click a verb for details.");
+    if (mode === "assessment") {
+      assessmentFlow.removeClass("d-none");
+      showInfo("Choose an assessment format to see verb entries grouped by Bloom level. Click a verb for details.");
+    }
+
+    backBtn.off("click").on("click", () => setMode("start"));
   }
 }
 
@@ -705,54 +720,38 @@ const NFQ_TIPS = {
 
 function renderNfqTips(level) {
   const target = document.getElementById("nfqTipsArea");
-  const nudge = document.getElementById("nfqQuickNudge");
   if (!target) return;
 
   if (!level || !NFQ_TIPS[level]) {
-    target.innerHTML = `<div class="text-muted">No level selected yet.</div>`;
-    if (nudge) nudge.textContent = "Pick a level to see guidance on appropriate cognitive demand, LO phrasing, and assessment design.";
+    target.innerHTML = `<div class="text-muted small">Select a level above to see guidance.</div>`;
     return;
   }
 
   const data = NFQ_TIPS[level];
 
   const focusBadges = (data.focus || [])
-    .map((f) => `<span class="badge bg-secondary me-2 mb-2">${escapeHtml(f)}</span>`)
+    .map((f) => `<span class="badge bg-secondary me-1 mb-1">${escapeHtml(f)}</span>`)
     .join("");
 
-  const characteristics = (data.characteristics || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("");
-  const tips = (data.tips || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("");
+  const characteristics = (data.characteristics || []).map((x) => `<li class="small">${escapeHtml(x)}</li>`).join("");
+  const tips = (data.tips || []).map((x) => `<li class="small">${escapeHtml(x)}</li>`).join("");
 
   target.innerHTML = `
     <div class="mb-2">
-      <h3 class="h6 mb-2">${escapeHtml(data.title)}</h3>
+      <h6 class="mb-2">${escapeHtml(data.title)}</h6>
       <div class="mb-2">${focusBadges}</div>
     </div>
 
-    <div class="row g-3">
-      <div class="col-12 col-lg-6">
-        <div class="card">
-          <div class="card-header">Key characteristics</div>
-          <div class="card-body">
-            <ul class="mb-0">${characteristics}</ul>
-          </div>
-        </div>
-      </div>
+    <div class="mb-3">
+      <strong class="small d-block mb-2">Key characteristics:</strong>
+      <ul class="mb-2 ps-3">${characteristics}</ul>
+    </div>
 
-      <div class="col-12 col-lg-6">
-        <div class="card">
-          <div class="card-header">Practical tips</div>
-          <div class="card-body">
-            <ul class="mb-0">${tips}</ul>
-          </div>
-        </div>
-      </div>
+    <div>
+      <strong class="small d-block mb-2">Practical tips:</strong>
+      <ul class="ps-3">${tips}</ul>
     </div>
   `;
-
-  if (nudge) {
-    nudge.textContent = `Guidance shown for NFQ Level ${level}. Use this alongside Bloom to sanity-check cognitive demand and assessment design.`;
-  }
 }
 
 function initNfqGuidance() {
@@ -807,8 +806,6 @@ function initUI() {
   // Start choice handlers
   $("#startLO").off("click").on("click", () => setMode("lo"));
   $("#startAssessment").off("click").on("click", () => setMode("assessment"));
-  $("#backFromLO").off("click").on("click", () => setMode("start"));
-  $("#backFromAssessment").off("click").on("click", () => setMode("start"));
 
   // LO search
   function doVerbSearch() {
@@ -843,7 +840,7 @@ function initUI() {
     renderVerbsForAssessment($(this).val());
   });
 
-  // NFQ guidance (standalone)
+  // NFQ guidance
   initNfqGuidance();
 
   setMode("start");
