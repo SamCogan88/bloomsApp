@@ -763,6 +763,26 @@ function initNfqGuidance() {
   renderNfqTips(sel.value);
 }
 
+// -------------------- Dark Mode --------------------
+function initDarkMode() {
+  const toggle = document.getElementById("darkModeToggle");
+  const icon = document.getElementById("darkModeIcon");
+  const isDark = localStorage.getItem("darkMode") === "true";
+
+  if (isDark) {
+    document.documentElement.classList.add("dark-mode");
+    icon.textContent = "☀️";
+  }
+
+  if (toggle) {
+    toggle.addEventListener("click", () => {
+      const isDarkNow = document.documentElement.classList.toggle("dark-mode");
+      localStorage.setItem("darkMode", isDarkNow);
+      icon.textContent = isDarkNow ? "☀️" : "🌙";
+    });
+  }
+}
+
 // -------------------- UI init --------------------
 function initUI() {
   if (document.getElementById("disclaimerText")) {
@@ -832,6 +852,8 @@ function initUI() {
 // -------------------- Boot --------------------
 async function boot() {
   try {
+    initDarkMode();
+    
     const res = await fetch("verbs.json", { cache: "no-store" });
     if (!res.ok) throw new Error("Failed to load verbs.json");
     RAW = await res.json();
