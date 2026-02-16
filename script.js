@@ -226,7 +226,7 @@ function setMode(mode) {
       loFlow.removeClass("d-none");
       $("#verbSearch").focus();
       showInfo(
-        "Type/select a verb (or click one on the left) to see meaning, Bloom level(s), LO stems, task ideas, and commonly suitable assessment formats."
+        "Type/select a verb (or click in the Bloom Hierarchy sidebar) to see meaning, Bloom level(s), LO stems, task ideas, and commonly suitable assessment formats."
       );
     }
 
@@ -729,8 +729,23 @@ function renderNfqTips(level) {
 
   const data = NFQ_TIPS[level];
 
+  // Map Bloom level names to colors for badges
+  const bloomColorMap = {
+    "Remember": "#0d6efd",
+    "Understand": "#198754",
+    "Apply": "#20c997",
+    "Analyse": "#6f42c1",
+    "Evaluate": "#fd7e14",
+    "Create": "#dc3545"
+  };
+
   const focusBadges = (data.focus || [])
-    .map((f) => `<span class="badge bg-secondary me-1 mb-1">${escapeHtml(f)}</span>`)
+    .map((f) => {
+      // Extract the Bloom level name (first word before any parenthetical)
+      const bloomLevel = f.split("(")[0].trim();
+      const bgColor = bloomColorMap[bloomLevel] || "#6c757d";
+      return `<span class="badge me-1 mb-1" style="background-color:${bgColor}; color:#fff">${escapeHtml(f)}</span>`;
+    })
     .join("");
 
   const characteristics = (data.characteristics || []).map((x) => `<li class="small">${escapeHtml(x)}</li>`).join("");
@@ -818,7 +833,7 @@ function initUI() {
     const matches = getVerbMatchesByText(q);
 
     if (matches.length === 0) {
-      showInfo("No exact match. Tip: choose a verb from the autocomplete suggestions (or click a verb on the left).");
+      showInfo("No exact match. Tip: choose a verb from the autocomplete suggestions (or click a verb in the Bloom Hierarchy sidebar).");
       return;
     }
 
